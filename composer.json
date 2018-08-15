@@ -33,10 +33,10 @@
             "enabled": false
         }
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ]
+    "repositories": { "packagist": { "type": "composer", "url": "https://packagist.phpcomposer.com" }},"extra": {
+    "asset-installer-paths": {
+        "npm-asset-library": "vendor/npm",
+        "bower-asset-library": "vendor/bower"
+    }
+}
 }
