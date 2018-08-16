@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\models\BonusRecord;
+use common\models\Order;
 use yii;
 use yii\data\Pagination;
 use yii\db\Query;
@@ -12,6 +14,7 @@ class AdminController extends Controller
     public $enableCsrfValidation = false;
     public $layout = false;
     const DEFAULT_SIZE = 10;
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -25,15 +28,15 @@ class AdminController extends Controller
 
         $orderQuery = (new Query())->from('order')
             ->select('order.*,user.name')
-            ->leftJoin('user','user.id = order.user_id')
+            ->leftJoin('user', 'user.id = order.user_id')
             ->orderBy('created_time desc');
         $pages = new Pagination(['totalCount' => $orderQuery->count(), 'pageSize' => self::DEFAULT_SIZE]);
         $orderList = $orderQuery->offset($offset)->limit($limit)->all();
 
-        foreach ($orderList as &$order){
-            $order['created_time'] = date('Y-m-d H:i:s',$order['created_time']);
+        foreach ($orderList as &$order) {
+            $order['created_time'] = date('Y-m-d H:i:s', $order['created_time']);
         }
-        return $this->render('order_list',['orderList'=>$orderList,'pages'=>$pages]);
+        return $this->render('order_list', ['orderList' => $orderList, 'pages' => $pages]);
     }
 
     /**
@@ -47,16 +50,23 @@ class AdminController extends Controller
             if (empty($id)) {
                 throw new \Exception("请选择订单");
             }
-            $order = (new Query())->from('order')->where(['id'=>$id])->one();
+            $order = (new Query())->from('order')->where(['id' => $id])->one();
             if (empty($order)) {
                 throw new \Exception("查无此订单");
             }
-            $parentId = $order['p_id'];
-            if($parentId){
-
+            if ($order['status'] == 1) {
+                throw new \Exception("已经标记过，无需在标记");
+            }
+            list($result, $msg) = BonusRecord::addRecord($id);
+            if ($result === false) {
+                throw new \Exception($msg);
+            }
+            $result = Order::updateAll(['status' => 1], ['id' => $id]);
+            if (empty($result)) {
+                throw new \Exception('标记失败');
             }
             $transaction->commit();
-            $this->asJson(['success' => 1, 'code' => 200, 'msg' => '删除成功']);
+            $this->asJson(['success' => 1, 'code' => 200, 'msg' => '标记成功']);
         } catch (\Exception $e) {
             $transaction->rollBack();
             $this->asJson(['success' => 0, 'code' => 2001, 'msg' => $e->getMessage()]);

@@ -16,7 +16,14 @@ $this->title = '订单管理';
     <link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css" />
     <link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css" />
 </head>
-
+<style>
+    .blue{
+    color: #1E9FFF;
+    }
+    .red{
+    color: red;
+    }
+</style>
 <body>
 <div class="page-content-wrap">
     <form class="layui-form" action="">
@@ -58,11 +65,11 @@ $this->title = '订单管理';
                 <td class="hidden-xs"><?=$order['order_sn']?></td>
                 <td class="hidden-xs"><?=$order['name']?></td>
                 <td class="hidden-xs"><?=$order['amount']?></td>
-                <td class="order_status" style="<?=$order['status'] ==0?'color: #1E9FFF;':'color: red;'?>"><?=$order['status'] ==0?'未支付':'已支付'?></td>
+                <td class="order_status  <?=$order['status'] ==0?'blue':'red'?>"><?=$order['status'] ==0?'未支付':'已支付'?></td>
                 <td><?=$order['created_time']?></td>
                 <td>
                     <div class="layui-inline">
-                        <button class="layui-btn layui-btn-mini <?=$order['status']==0?'layui-btn-danger':""?> del-btn pay" data-id="<?=$order['id']?>" ><?=$order['status']==0?'标记支付':"已支付"?></button>
+                        <button class="layui-btn layui-btn-mini <?=$order['status']==0?'layui-btn-danger pay':""?>" data-id="<?=$order['id']?>" ><?=$order['status']==0?'标记支付':"已支付"?></button>
                     </div>
                 </td>
             </tr>
@@ -79,9 +86,11 @@ $this->title = '订单管理';
 <script>
     layui.use(['form', 'jquery', 'layer', 'dialog'], function() {
         var $ = layui.jquery;
+        var dialog = layui.dialog;
         //顶部批量删除
-        $('.delBtn').click(function() {
+        $('.pay').click(function() {
             var id=$(this).attr('data-id');
+            var taht = $(this);
             dialog.confirm({
                 message:'您确定要标记已支付吗？',
                 success:function(){
@@ -94,23 +103,19 @@ $this->title = '订单管理';
                             layer.msg(data.msg);
                             if (data.code == 200) {
                                 //改变状态
-                                $(this).parents('tr').find('.order_status').html('已支付')
-                                $(this).parents('tr').find('.pay').html('已支付')
-                                $(this).parents('tr').find('.pay').removeClass('layui-btn-danger')
+                                taht.parents('tr').find('.order_status').addClass('red')
+                                taht.parents('tr').find('.order_status').html('已支付')
+                                taht.parents('tr').find('.pay').html('已支付')
+                                taht.parents('tr').find('.pay').removeClass('layui-btn-danger')
                             }
                         }
                     });
-                    layer.msg('标记成功')
                 },
                 cancel:function(){
 
                 }
             })
             return false;
-
-        }).mouseenter(function() {
-
-            dialog.tips('批量删除', '.delBtn');
 
         })
 
