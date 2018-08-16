@@ -32,7 +32,13 @@ $this->title = '后台首页';
             <li class="layui-nav-item">
                 <a href="javascript:;"><i class="iconfont">&#xe608;</i>订单管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" data-url="/index.php?r=admin/order-view" data-id='9' data-text="订单管理"><span class="l-line"></span>单页管理</a></dd>
+                    <dd><a href="javascript:;" data-url="/index.php?r=admin/order-view" data-id='9' data-text="订单管理"><span class="l-line"></span>订单管理</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont">&#xe608;</i>佣金管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" data-url="/index.php?r=admin/bonus-view" data-id='9' data-text="佣金管理"><span class="l-line"></span>佣金管理</a></dd>
                 </dl>
             </li>
             <!--<li class="layui-nav-item">

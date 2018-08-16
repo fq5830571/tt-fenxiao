@@ -39,6 +39,32 @@ class AdminController extends Controller
         return $this->render('order_list', ['orderList' => $orderList, 'pages' => $pages]);
     }
 
+    public function actionBonusView()
+    {
+        $page = Yii::$app->request->get('page');
+        $limit = Yii::$app->request->get('limit') ? Yii::$app->request->get('limit') : self::DEFAULT_SIZE;
+        $offset = ($page - 1) * $limit;
+        $name = Yii::$app->request->post('name');
+        $bonusQuery = (new Query())->from('bonus_record')
+            ->select('bonus_record.*,user.name,user.balance,order.order_sn')
+            ->leftJoin('user', 'user.id = bonus_record.user_id')
+            ->leftJoin('order', 'order.id = bonus_record.order_id')
+            ->orderBy('bonus_record.created_time desc');
+        if ($name) {
+            $bonusQuery->andwhere([
+                'or',
+                ['like', 'user.name', $name],
+            ]);
+        }
+        $pages = new Pagination(['totalCount' => $bonusQuery->count(), 'pageSize' => self::DEFAULT_SIZE]);
+        $bonusList = $bonusQuery->offset($offset)->limit($limit)->all();
+
+        foreach ($bonusList as &$bonus) {
+            $bonus['created_time'] = date('Y-m-d H:i:s', $bonus['created_time']);
+        }
+        return $this->render('bonus', ['bonusList' => $bonusList, 'pages' => $pages]);
+    }
+
     /**
      * 标记支付
      */

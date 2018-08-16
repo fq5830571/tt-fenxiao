@@ -12,7 +12,7 @@ $this->title = '订单管理';
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>订单管理</title>
+    <title>佣金明细</title>
     <link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css" />
     <link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css" />
 </head>
@@ -26,17 +26,10 @@ $this->title = '订单管理';
 </style>
 <body>
 <div class="page-content-wrap">
-    <form class="layui-form" action="">
+    <form class="layui-form"  action="/index.php?r=admin/bonus-view" method="post">
         <div class="layui-form-item">
             <div class="layui-inline">
-                <input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-inline">
-                <select name="states" lay-filter="status">
-                    <option value="">订单状态</option>
-                    <option value="0">未支付</option>
-                    <option value="1">已支付</option>
-                </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择一个状态" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="010" class="">正常</dd><dd lay-value="021" class="">停止</dd><dd lay-value="0571" class="">删除</dd></dl></div>
+                <input type="text" name="name" placeholder="请输入姓名" autocomplete="off" class="layui-input">
             </div>
             <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
         </div>
@@ -45,36 +38,29 @@ $this->title = '订单管理';
         <table class="layui-table" lay-even lay-skin="nob">
             <colgroup>
                 <col width="100">
-                <col width="100">
+                <col width="200">
+                <col width="200">
                 <col  width="100">
                 <col  width="100">
-                <col width="100">
-                <col width="150">
             </colgroup>
             <thead>
             <tr>
                 <!--<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>-->
-                <th >订单编号</th>
-                <th >付款人</th>
-                <th >支付金额</th>
-                <th>支付状态</th>
-                <th>支付时间</th>
-                <th>操作</th>
+                <th >姓名</th>
+                <th >获得佣金金额</th>
+                <th >关联订单编号</th>
+                <th >账户余额</th>
+                <th>获得时间</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($orderList as $order){?>
+            <?php foreach ($bonusList as $bonus){?>
             <tr>
-                <td class="hidden-xs"><?=$order['order_sn']?></td>
-                <td class="hidden-xs"><?=$order['name']?></td>
-                <td class="hidden-xs"><?=$order['amount']?></td>
-                <td class="order_status  <?=$order['status'] ==0?'blue':'red'?>"><?=$order['status'] ==0?'未支付':'已支付'?></td>
-                <td><?=$order['created_time']?></td>
-                <td>
-                    <div class="layui-inline">
-                        <button class="layui-btn layui-btn-mini <?=$order['status']==0?'layui-btn-danger pay':""?>" data-id="<?=$order['id']?>" ><?=$order['status']==0?'标记支付':"已支付"?></button>
-                    </div>
-                </td>
+                <td class="hidden-xs"><?=$bonus['name']?></td>
+                <td class="hidden-xs" style="color: forestgreen;">+<?=$bonus['bonus_amount']?></td>
+                <td class="hidden-xs"><?=$bonus['order_sn']?></td>
+                <td class="hidden-xs"><?=$bonus['balance']?></td>
+                <td class="order_status"><?=$bonus['created_time']?></td>
             </tr>
             <?php }?>
             </tbody>
