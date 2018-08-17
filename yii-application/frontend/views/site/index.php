@@ -72,7 +72,7 @@
 
     <div class="div_header">
 			<span style='float:left;margin-left:10px;margin-right:10px;'>
-					<img src='".$img."' width='70px;' height='70px;'>
+					<img src="/Public/Static/images/defult.jpg" width='70px;' height='70px;'>
 			</span>
         <span class="header_right">
 				<div class="header_l_di">
@@ -80,8 +80,8 @@
 					<<a style='color:red' href="<? ?>">账号设置</a>>
 				</div>
 				<div><span>合伙人：</span></div>
-				<div><span>关注时间：<? ?>&nbsp;&nbsp;
-                        <a style='color:red' href="./index.php?r=admin/logout">退出登录</a>></span></div>
+				<div><span>注册时间：<?=date('Y-m-d',$user['created_time']) ?>&nbsp;&nbsp;
+                        <<a style='color:red' href="./index.php?r=admin/logout">退出登录</a>></span></div>
 				<div><span> 会员ID：<?=$user['id'] ?>
 				   </span></div>
     </div>
