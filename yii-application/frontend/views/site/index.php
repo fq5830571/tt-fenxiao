@@ -72,101 +72,83 @@
 
     <div class="div_header">
 			<span style='float:left;margin-left:10px;margin-right:10px;'>
-				<php>
-					$wx_info = json_decode($users['wx_info'],true);
-					$img = !empty($wx_info['headimgurl'])?$wx_info['headimgurl']:'../Public/Static/images/defult.jpg';
-					echo "<img src='".$img."' width='70px;' height='70px;'>";
-				</php>
+					<img src='".$img."' width='70px;' height='70px;'>
 			</span>
         <span class="header_right">
 				<div class="header_l_di">
-					<span>昵称：<php> echo $wx_info['nickname'];</php></span>&nbsp;&nbsp;
-					<<a style='color:red' href="./index.php?g=App&m=Member&a=index&uid={$users.uid}">账号设置</a>>
+					<span>昵称：<?=$user['name'] ?></span>&nbsp;&nbsp;
+					<<a style='color:red' href="<? ?>">账号设置</a>>
 				</div>
-				<div><span>合伙人：<if condition="$users.member eq 1">是<else/>否(<a style='color:red'
-                                                                               href='./index.php?g=App&m=Index&a=index'>点击链接成为合伙人</a>)</if></span></div>
-				<div><span>关注时间：<php>echo date('Y-m-d',$wx_info['subscribe_time']);</php>&nbsp;&nbsp;<a
-                                style='color:red' href="./index.php?g=App&m=Member&a=logout">退出登录</a>></span></div>
-				<div><span> 会员ID：{$users.id}
+				<div><span>合伙人：</span></div>
+				<div><span>关注时间：<? ?>&nbsp;&nbsp;
+                        <a style='color:red' href="./index.php?r=admin/logout">退出登录</a>></span></div>
+				<div><span> 会员ID：<?=$user['id'] ?>
 				   </span></div>
     </div>
 
     <div class="div_table">
         <table style='height:35px;text-align:center;background-color:#e61945;border:0px' border=0>
             <tr style="border:0px" border=0>
-                <td style="background-color:#e61945;">销售额：{$all_buy_price}元</td>
-                <td style="border-left:1px solid #fff;background-color:#e61945;">我的佣金：{$all_price}元</td>
+                <td style="background-color:#e61945;">销售额：<?=$user['balance'] * 5?>元</td>
+                <td style="border-left:1px solid #fff;background-color:#e61945;">我的佣金：<?=$user['balance'] ?>元</td>
             </tr>
         </table>
 
     </div>
 
-    <div class="cardexplain" style="TEXT-ALIGN: center;color:#000;font-size:14px;">您是由【{$l_name}】推荐</div>
+    <div class="cardexplain" style="TEXT-ALIGN: center;color:#000;font-size:14px;">您是由【<?=$parentName ?>】推荐</div>
     <div class="cardexplain" style="TEXT-ALIGN: center;color:#006400;font-size:13px;">
-        <marquee scrollamount=1 scrolldelay=7 direction=left>{$info.notification}</marquee>
     </div>
     <div class="cardexplain">
         <div class="div_ul" id="all_cnt"><span><img style='margin-left:5px;'
                                                     src="../Public/Static/images/arrow_unclick.png">家族成员</span><span
-                    class="bg_total">{$all_cnt} 人</span></div>
+                    class="bg_total"><?=$totalCount ?> 人</span></div>
         <ul class="round">
             <li class="member_cnt" style=""><a href="{$type_a_url}"><span><img style="width:20px;height:20px;"
                                                                                src="../Public/Static/images/bullet_blue_expand.png">一级会员<span
-                                style="float:right;color:red;">{$users.a_cnt}</span></span></a></li>
-            <li class="member_cnt"><a href="{$type_b_url}"><span><img style="width:20px;height:20px;"
-                                                                      src="../Public/Static/images/bullet_blue_expand.png">二级会员<span
-                                style="float:right;color:red;">{$users.b_cnt}</span></span></a></li>
-            <li class="member_cnt"><a href="{$type_c_url}"><span><img style="width:20px;height:20px;"
-                                                                      src="../Public/Static/images/bullet_blue_expand.png">三级会员<span
-                                style="float:right;color:red;">{$users.c_cnt}</span></span></a></li>
+                                style="float:right;color:red;"><?=$levelCount ?></span></span></a></li>
         </ul>
     </div>
 
     <div class="cardexplain">
 
         <div class="div_ul" id="all_buy"><span><img style='margin-left:5px;'
-                                                    src="../Public/Static/images/arrow_unclick.png">家族推广<span
-                        class="bg_total">{$all_count_buy} 单</span></span></div>
+                                                    src="../Public/Static/images/arrow_unclick.png">我的订单<span
+                        class="bg_total"><?=($payCount+$notPayCount) ?> 单</span></span></div>
         <ul class="round">
-            <li class="buy_cnt"><span>下单未购买<span style="float:right;color:red;">{$all_over_buy}</span></span></li>
-            <li class="buy_cnt"><span>下单已购买<span style="float:right;color:red;">{$all_buy}</span></span></li>
+            <li class="buy_cnt"><span>下单未支付<span style="float:right;color:red;"><?=$payCount ?>单</span></span></li>
+            <li class="buy_cnt"><span>下单已支付<span style="float:right;color:red;"><?=$notPayCount ?>单</span></span></li>
         </ul>
     </div>
 
 
-    <div class="cardexplain">
+   <div class="cardexplain">
         <div class="div_ul" id="all_price"><span><img style='margin-left:5px;'
                                                       src="../Public/Static/images/arrow_unclick.png">我的佣金<span
-                        class="bg_total">{$all_price} 元</span></span></div>
+                        class="bg_total"><?=$user['balance'] ?> 元</span></span></div>
         <ul class="round">
-            <li class="price_cnt"><span>未付款定单佣金<span style="float:right;color:red;">{$start_price}</span></span></li>
-            <li class="price_cnt"><span>已付款定单佣金<span style="float:right;color:red;">{$over_price}</span></span></li>
-            <li class="price_cnt"><span>已收货定单佣金<span style="float:right;color:red;">{$confirm_price}</span></span></li>
-            <li class="price_cnt"><span>已完成定单佣金<span style="float:right;color:red;">{$add_over_price}</span></span></li>
-            <li class="price_cnt"><span>待审核提现佣金<span style="float:right;color:red;">{$get_start_price}</span></span>
-            </li>
-            <li class="price_cnt"><span>已提现佣金<span style="float:right;color:red;">{$get_end_price}</span></span></li>
-            <li class="price_cnt"><span>可提现佣金<span style="float:right;color:red;">{$users.price}</span></span></li>
+            <li class="price_cnt" style=""><a href="{$type_a_url}"><span><img style="width:20px;height:20px;"
+                                                                               src="../Public/Static/images/bullet_blue_expand.png">佣金明细</span></a></li>
         </ul>
     </div>
-    <div class="cardexplain">
+    <!--<div class="cardexplain">
         <div class="div_ul" onClick="$('#tx').click();"><span><img style='margin-left:5px;'
                                                                    src="../Public/Static/images/arrow_unclick.png">申请提现</span>
         </div>
-    </div>
+    </div>-->
     <div class="cardexplain">
         <div class="div_ul" id="memeber_url"><span><img style='margin-left:5px;'
                                                         src="../Public/Static/images/arrow_unclick.png">分享链接</span>
         </div>
-        <span class="memeber_url" style='display:none;'>{$member_url}</span>
+        <span class="memeber_url" style='display:none;'><?=$link?></span>
     </div>
-    <div class="cardexplain">
+    <!--<div class="cardexplain">
         <a href='./index.php?g=App&m=Index&a=member_top&id={$users.id}'>
             <div class="div_ul" id="top_url"><span><img style='margin-left:5px;'
                                                         src="../Public/Static/images/arrow_unclick.png">销售排行榜</span>
             </div>
         </a>
-    </div>
+    </div>-->
     <div style="text-align:center;"></div>
 </div>
 
@@ -349,7 +331,7 @@
 
 <div class="footermenu">
     <ul>
-        <li><a href="./index.php?g=App&m=Index&a=listsp&id=1"> <img src="../Public/Static/images/21.png">
+        <li><a href="./index.php?r=site/goods-list-view"> <img src="../Public/Static/images/21.png">
                 <p>立即购买</p>
             </a></li>
         <li id="user"><a href="javascript:void(0);"> <img src="../Public/Static/images/22.png">
@@ -359,9 +341,6 @@
                 <p>销售业绩</p>
             </a></li>
         <li id="ticket"><a href="javascript:void(0);"> <img src="../Public/Static/images/24.png">
-                <p>我的二维码</p>
-            </a></li>
-        <li style='display:none;' id="tx"><a href="javascript:void(0);"> <img src="../Public/Static/images/24.png">
                 <p>我的二维码</p>
             </a></li>
     </ul>
