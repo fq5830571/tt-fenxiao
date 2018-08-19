@@ -110,6 +110,10 @@ class MemberController extends Controller
 
     }
 
+    public function actionOrder(){
+        return $this->render('order');
+    }
+
     public function actionOrderView()
     {
         $page = Yii::$app->request->get('page');
