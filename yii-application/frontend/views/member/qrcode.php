@@ -123,7 +123,9 @@
             display:block;
         }
          canvas{
-             width: 100%;
+             width: 38%;
+             margin-left: 30%;
+             margin-top: 12%;
          }
     </style>
 </head><body class="sanckbg mode_webapp"><div class="window" id="windowcenter">
@@ -428,9 +430,9 @@
         <li id="user"><a href="javascript:void(0);" class=""> <img src="/Public/Static/images/22.png">
                 <p>我的订单</p>
             </a></li>
-        <li id="member"><a href="javascript:void(0);" class=""> <img src="/Public/Static/images/23.png">
+       <!-- <li id="member"><a href="javascript:void(0);" class=""> <img src="/Public/Static/images/23.png">
                 <p>销售业绩</p>
-            </a></li>
+            </a></li>-->
         <li id="ticket"><a href="javascript:void(0);" class="active"> <img src="/Public/Static/images/24.png">
                 <p>我的二维码</p>
             </a></li>

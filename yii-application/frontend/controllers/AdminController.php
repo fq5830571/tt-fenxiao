@@ -19,6 +19,15 @@ class AdminController extends Controller
     {
         return $this->render('index');
     }
+    public function actionHome()
+    {
+        $todayEndTime  = strtotime(date('Ymd 23:59:59',time()));
+        $todayStartTime = $todayEndTime - 86400;
+        $userCount = (new Query())->from('user')->where('created_time >='.$todayStartTime)->andWhere('created_time <='.$todayEndTime)->count();
+        $currentOrderCount = (new Query())->from('order')->where('created_time >='.$todayStartTime)->andWhere('created_time <='.$todayEndTime)->count();
+        $currentBonusAmount = (new Query())->from('bonus_record')->where('created_time >='.$todayStartTime)->andWhere('created_time <='.$todayEndTime)->sum('bonus_amount');
+        return $this->render('home',['userCount'=>$userCount,'currentOrderCount'=>$currentOrderCount,'currentBonusAmount'=>$currentBonusAmount]);
+    }
 
     public function actionOrderView()
     {

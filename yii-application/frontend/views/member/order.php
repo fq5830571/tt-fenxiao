@@ -1,1290 +1,517 @@
 <html>
 <head>
-    <meta http-equiv="Content-Type"content="text/html; charset=UTF-8">
-    <meta name="viewport"content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
-    <meta name="apple-mobile-web-app-capable"content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style"content="black">
-    <meta name="format-detection"content="telephone=no">
-    <link href="../Public/Static/css/foods.css" rel="stylesheet" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title></title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="/Public/Static/css/foods.css?t=333" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/Public/Static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/Public/Static/js/wemall.js?14115"></script>
+    <script type="text/javascript" src="/Public/Static/js/alert.js"></script>
+    <style type="text/css">
+
+        .window {
+            width: 290px;
+            position: fixed;
+            display: none;
+            bottom: 30px;
+            left: 50%;
+            z-index: 9999;
+            margin: -50px auto 0 -145px;
+            padding: 2px;
+            border-radius: 0.6em;
+            -webkit-border-radius: 0.6em;
+            -moz-border-radius: 0.6em;
+            background-color: #ffffff;
+            -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font: 14px/1.5 Microsoft YaHei, Helvitica, Verdana, Arial, san-serif;
+        }
+
+        .window .title {
+
+            background-color: #A3A2A1;
+            line-height: 26px;
+            padding: 5px 5px 5px 10px;
+            color: #ffffff;
+            font-size: 16px;
+            border-radius: 0.5em 0.5em 0 0;
+            -webkit-border-radius: 0.5em 0.5em 0 0;
+            -moz-border-radius: 0.5em 0.5em 0 0;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#585858), to(#565656)); /* Saf4+, Chrome */
+            background-image: -webkit-linear-gradient(#585858, #565656); /* Chrome 10+, Saf5.1+ */
+            background-image: -moz-linear-gradient(#585858, #565656); /* FF3.6 */
+            background-image: -ms-linear-gradient(#585858, #565656); /* IE10 */
+            background-image: -o-linear-gradient(#585858, #565656); /* Opera 11.10+ */
+            background-image: linear-gradient(#585858, #565656);
+
+        }
+
+        .window .content {
+            /*min-height:100px;*/
+            overflow: auto;
+            padding: 10px;
+            background: linear-gradient(#FBFBFB, #EEEEEE) repeat scroll 0 0 #FFF9DF;
+            color: #222222;
+            text-shadow: 0 1px 0 #FFFFFF;
+            border-radius: 0 0 0.6em 0.6em;
+            -webkit-border-radius: 0 0 0.6em 0.6em;
+            -moz-border-radius: 0 0 0.6em 0.6em;
+        }
+
+        .window #txt {
+            min-height: 30px;
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        .window .txtbtn {
+
+            background: #f1f1f1;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#DCDCDC), to(#f1f1f1)); /* Saf4+, Chrome */
+            background-image: -webkit-linear-gradient(#ffffff, #DCDCDC); /* Chrome 10+, Saf5.1+ */
+            background-image: -moz-linear-gradient(#ffffff, #DCDCDC); /* FF3.6 */
+            background-image: -ms-linear-gradient(#ffffff, #DCDCDC); /* IE10 */
+            background-image: -o-linear-gradient(#ffffff, #DCDCDC); /* Opera 11.10+ */
+            background-image: linear-gradient(#ffffff, #DCDCDC);
+            border: 1px solid #CCCCCC;
+            border-bottom: 1px solid #B4B4B4;
+            color: #555555;
+            font-weight: bold;
+            text-shadow: 0 1px 0 #FFFFFF;
+            border-radius: 0.6em 0.6em 0.6em 0.6em;
+            display: block;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            text-align: windowcenter;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 6px;
+            margin: 10px 0 0 0;
+        }
+
+        .window .txtbtn:visited {
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc)); /* Saf4+, Chrome */
+            background-image: -webkit-linear-gradient(#ffffff, #cccccc); /* Chrome 10+, Saf5.1+ */
+            background-image: -moz-linear-gradient(#ffffff, #cccccc); /* FF3.6 */
+            background-image: -ms-linear-gradient(#ffffff, #cccccc); /* IE10 */
+            background-image: -o-linear-gradient(#ffffff, #cccccc); /* Opera 11.10+ */
+            background-image: linear-gradient(#ffffff, #cccccc);
+        }
+
+        .window .txtbtn:hover {
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc)); /* Saf4+, Chrome */
+            background-image: -webkit-linear-gradient(#ffffff, #cccccc); /* Chrome 10+, Saf5.1+ */
+            background-image: -moz-linear-gradient(#ffffff, #cccccc); /* FF3.6 */
+            background-image: -ms-linear-gradient(#ffffff, #cccccc); /* IE10 */
+            background-image: -o-linear-gradient(#ffffff, #cccccc); /* Opera 11.10+ */
+            background-image: linear-gradient(#ffffff, #cccccc);
+        }
+
+        .window .txtbtn:active {
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#cccccc), to(#ffffff)); /* Saf4+, Chrome */
+            background-image: -webkit-linear-gradient(#cccccc, #ffffff); /* Chrome 10+, Saf5.1+ */
+            background-image: -moz-linear-gradient(#cccccc, #ffffff); /* FF3.6 */
+            background-image: -ms-linear-gradient(#cccccc, #ffffff); /* IE10 */
+            background-image: -o-linear-gradient(#cccccc, #ffffff); /* Opera 11.10+ */
+            background-image: linear-gradient(#cccccc, #ffffff);
+            border: 1px solid #C9C9C9;
+            border-top: 1px solid #B4B4B4;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset;
+        }
+
+        .window .title .close {
+            float: right;
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVEhL7dNtCoAgDAZgb60nsGN1tPLVCVNHmg76kQ8E1mwv+GG27cestQ4PvTZ69SFocBGpWa8+zHt/Up+IN+MhgLlUmnIE1CpBQB2COZibfpnXhHFaIZkYph0SOeeK/QJ8o7KOek84fkCWSBtfL+Ny2MPpCkPFMH6PWEhWhKncIyEk69VfiUuVhqJefds+YcwNbEwxGqGIFWYAAAAASUVORK5CYII=");
+            width: 26px;
+            height: 26px;
+            display: block;
+        }
+    </style>
 </head>
-<body>
-<style>
-    .deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}
-    .deploy_ctype_tip p{display:inline-block;padding:13px 24px;border:solid#d6d482 1px;background:#f5f4c5;font-size:16px;color:#8f772f;line-height:18px;border-radius:3px;}
-    body, article, section, h1, h2, hgroup, p, a, ul, li, em, div, small, span, footer, canvas, figure, figcaption, input {
-        margin: 0;
-        padding: 0;
-    }
-    a {
-        color:#333;
-        cursor: pointer;
-        text-decoration: none;
-    }
-    ul,li{
-        list-style-type: none;
-    }
-    .clr{
-        clear:both;
-    }
-    body {
-        background-color: #ECECEC;
-        font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;
-        margin: 0;
-        overflow-x: hidden;
-        padding: 0;
-        color: #666666;
-    }
-    .qiandaobanner{
-        display:block;
-        text-align:center;
-        position: relative;
-        min-height: 26px;
-    }
-    .qiandaobanner img{
-        width:100%;
-        border:0;
-        min-width:320px;
-    }
+<body class="sanckbg mode_webapp">
+<div class="window" id="windowcenter">
+    <div id="title" class="title">消息提醒<span class="close" id="alertclose"></span></div>
+    <div class="content">
+        <div id="txt"></div>
+        <input type="button" value="确定" id="windowclosebutton" name="确定" class="txtbtn">
+    </div>
+</div>
 
-    .qiandaobanner  span {
-        background-color: rgba(0, 0, 0, 0.5);
-        bottom: 0;
-        color: #FFFFFF;
-        display: block;
-        font-size: 16px;
-        margin: 0 auto;
-        line-height: 26px;
-        position: absolute;
-        text-align: center;
-        width: 100%;
-    }
-    .cardexplain{
-        margin:11px 10px 20px 9px;
-        min-width:301px;
-    }
-    h2 {
-        color: #373B3E;
-        font-size: 14px;
-        line-height: 32px;
-        padding-left: 10px;
-        padding-top: 5px;
-        text-align: left;
-        font-weight:normal;
-    }
+<script type="text/javascript">
+    var appurl = '/index.php';
+    var rooturl = '';
 
-    ul.round {
-        border:1px solid #C6C6C6;
-        background-color:rgba(255, 255, 255, 0.9);
-        text-align:left;
-        font-size:14px;
-        line-height:24px;
-        border-radius:5px;
-        -webkit-border-radius:5px;
-        -moz-border-radius:5px;
-        -moz-box-shadow:0 1px 1px #f6f6f6;
-        -webkit-box-shadow:0 1px 1px #f6f6f6;
-        box-shadow:0 1px 1px #f6f6f6;
-        margin-bottom:11px;
-        display:block
-    }
+    $(function () {
+        $("#all_cnt").click(function () {
+            $(".member_cnt").toggle();
+            if ($(this).find('img').attr("src") == "/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png") {
+                $(this).find('img').attr("src", "/Application/Tpl/App/default/Public/Static/images/arrow_click.png");
+            }
+            else {
+                $(this).find('img').attr("src", "/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png");
+            }
+        });
 
-    ul.round li {
-        border:solid #C6C6C6;
-        border-width:0 0 1px 0;
-        padding:0px 10px 0 10px;
-    }
-    ul.round li:only-of-type {
-        border-width:0;
-    }
-    ul.round li:last-of-type {
-        border-width:0;
-    }
-    .round li, .round li span, .round li a {
-        line-height:22px;
-    }
-    .round li span {
-        display:block;
-        background:url(img/arrow3.png) no-repeat right 50%;
-        -webkit-background-size:8.5px 13px;
-        background-size:8.5px 13px;
-        padding:10px 20px 9px 0;
-        position:relative;
-        font-size:16px;
-        min-height: 22px;
-    }
-    .round li span.none {
-        background: none repeat scroll 0 0 transparent;
-    }
-    .round li span.noneorder {
-        background: none repeat scroll 0 0 transparent;
-        padding:10px 5px 9px 0;
-    }
-    .round li span.none em {
-        right: 0;
-    }
+        $("#all_price").click(function () {
+            $(".price_cnt").toggle();
+            if ($(this).find('img').attr("src") == "/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png") {
+                $(this).find('img').attr("src", "/Application/Tpl/App/default/Public/Static/images/arrow_click.png");
+            }
+            else {
+                $(this).find('img').attr("src", "/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png");
+            }
+        });
 
-    .round li.addr{
-        background: url(img/addr.png) no-repeat scroll 10px 13px transparent;
-        background-size:15px 15px;
-        line-height: 22px;
-        padding-left: 34px;
-    }
-    .round li.addr span{
-        font-size:14px;
-    }
-    .mb{ margin-bottom:4px}
-    .round li.nob {
-        border-width:0;
-    }
-    .round li.dandanb {
-        border-color:#EBEBEB;
-    }
-    .round li.nob .px{
-        border-radius:5px;
-        -webkit-border-radius:5px;
-        -moz-border-radius:5px;
-        background-color: #FFFFFF;
-        border: 1px solid #E8E8E8;
-        margin: 5px 0 4px;
-        padding: 5px 10px;
-    }
-    .round li.nob .dropdown-select{
-        border-radius:5px;
-        -webkit-border-radius:5px;
-        -moz-border-radius:5px;
-        background-color: #FFFFFF;
-        border: 1px solid #E8E8E8;
-        margin: 5px 0 4px;
-        padding: 5px 10px;
-    }
-    .round li.nob .pxtextarea{
-        border-radius:5px;
-        -webkit-border-radius:5px;
-        -moz-border-radius:5px;
-        background-color: #FFFFFF;
-        border: 1px solid #E8E8E8;
-        margin: 5px 0 5px;
-        padding: 5px 10px;
-    }
-    ul.round li.nob:last-of-type {
-        margin-bottom:8px
-    }
-    .round li.tel {
-        background: url(img/tel.png) no-repeat scroll 11px 13px transparent;
-        background-size:15px 15px;
-        line-height: 22px;
-        padding-left: 34px;
-    }
-    .round li.tel2 {
-        background: url(img/tel2.png) no-repeat scroll 11px 13px transparent;
-        background-size:15px 15px;
-        line-height: 22px;
-        padding-left: 34px;
-    }
-    .round li.userinfo {
-        background: url(img/userinfo.png) no-repeat scroll 11px 13px transparent;
-        background-size:15px 15px;
-        line-height: 22px;
-        padding-left: 34px;
-    }
-    .round li.detail {
-        background: url(img/detail.png) no-repeat scroll 10px 13px transparent;
-        background-size:15px 15px;
-        line-height: 22px;
-        padding-left: 34px;
-        -webkit-border-radius:0 0 5px 5px;
-        border-radius:0 0 5px 5px;
-    }
-    .round li.gift {
-        background: url(img/gift.png) no-repeat scroll 10px 13px transparent;
-        background-size:15px 15px;
-        line-height: 22px;
-        padding-left: 34px;
-        -webkit-border-radius:0 0 5px 5px;
-        border-radius:0 0 5px 5px;
-    }
-    .round li h2 {
-        color: #373B3E;
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 20px;
-        padding: 10px 0 10px 0;
-        border-bottom:1px dotted #C6C6C6;
-    }
-    .round li span h2 {
-        color: #373B3E;
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 20px;
-        padding: 6px 20px 6px 0;
-        border-bottom:0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    .round li span img {
-        border: 0 none;
-        width:50px;
-        height:50px;
-        float:left;
-        margin:0 10px 0 0;
-    }
-    .round li span img.showimg {
-        border: 0 none;
-        width:108px;
-        height:60px;
-        float:left;
-        margin:0 10px 0 0;
-        border-radius: 3px 3px 3px 3px;
-    }
-    .round li span p{
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        padding-right: 10px;
-    }
+        $("#memeber_url").click(function () {
+            $(".memeber_url").toggle();
+            if ($(this).find('img').attr("src") == "/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png") {
+                $(this).find('img').attr("src", "/Application/Tpl/App/default/Public/Static/images/arrow_click.png");
+            }
+            else {
+                $(this).find('img').attr("src", "/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png");
+            }
+        });
 
-    .round li .text {
-        padding:10px 0 10px;
-    }
-    .round li .btop {
-        background-color: #F5F5F5;
-        margin-bottom: 10px;
-        padding: 10px;
-    }
-    .round li .text p {
-        line-height: 20px; font-size:14px; color:#666;
-    }
-    .round li img{
-        max-width:100%;
-        border:0;
-    }
+        $("#all_buy").click(function () {
+            $(".buy_cnt").toggle();
+            if ($(this).find('img').attr("src") == "/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png") {
+                $(this).find('img').attr("src", "/Application/Tpl/App/default/Public/Static/images/arrow_click.png");
+            }
+            else {
+                $(this).find('img').attr("src", "/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png");
+            }
+        });
 
-    .round li span em{
-        display:block;
-        -webkit-border-radius:20px;
-        border-radius:20px;
-        color:#FFF;
-        font-size: 12px;
-        line-height: 12px;
-        margin-top: -10px;
-        padding: 4px 8px;
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        text-shadow: 0 0 #FFFFFF;
-        font-style:normal;
-    }
-    em.ok{
-        background-color: #1CC200;
-    }
-    em.error{
-        background-color: #FF6600;
-    }
-    em.no{
-        background-color: #BBBBBB;
-    }
-    em.more {
-        text-shadow:0 1px #FFF !important;
-        color: #666666 !important;
-        right:8px !important;
-    }
-    .price{
-        color: #FF6600; font-size:16px;
-    }
-    .price2{
-        color: #1CC200; font-size:16px;
-    }
-    .round li span.jifen em{
-        left:70px; font-style:normal;color: #1CC200;font-size: 18px;
-    }
-    ul.round li.biaotou { padding-right:30px;border-bottom: 1px solid #DADADA;background-color: #EBEBEB;}
-    ul.round li.pad { padding-right:15px;}
-    .biaotou td{ color:#999;font-size: 12px;}
-    .biaotou td.yuanjia{ color:#999;font-size: 12px;text-align: right; width:70px;}
-    .biaotou td.youhuijia{ color:#999;font-size: 12px; text-align:right; width:70px;}
-
-
-
-    .jiagebiao td.yuanjia{ color:#999;font-size: 14px; text-align:right; width:70px;}
-    .jiagebiao td.youhuijia{ color:#F60;font-size: 14px; text-align:right; width:70px;}
-
-    a.yuanjia{ color:#999;font-size: 12px; line-height:14px }
-    a.youhuijia{ color:#F60;font-size: 14px; line-height:14px }
-    .round li.orderinfo{
-        background: url(img/order.png) no-repeat scroll 10px 13px transparent;
-        background-size:15px 15px;
-        line-height: 22px;
-        padding-left: 34px;
-    }
-    .round li.title{
-        background-color:#E1E1E1;
-        background-image: linear-gradient(bottom, #E7E7E7 0%, #f9f9f9 100%);
-        background-image: -o-linear-gradient(bottom, #E7E7E7 0%, #f9f9f9 100%);
-        background-image: -moz-linear-gradient(bottom, #E7E7E7 0%, #f9f9f9 100%);
-        background-image: -webkit-linear-gradient(bottom, #E7E7E7 0%, #f9f9f9 100%);
-        background-image: -ms-linear-gradient(bottom, #E7E7E7 0%, #f9f9f9 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #E7E7E7),
-            color-stop(1, #f9f9f9)
-        );
-        -webkit-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 0 #EEEEEE;
-        -moz-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 0 #EEEEEE;
-        box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 0 #EEEEEE;
-        -webkit-border-radius: 5px 5px 0 0;
-        -moz-border-radius: 5px 5px 0 0;
-        -o-border-radius: 5px 5px 0 0;
-        border-radius: 5px 5px 0 0;
-    }
-    .round li.title span{
-        padding: 5px 15px 4px 0;font-size: 14px; color:#666;text-shadow:0 1px #FFF;
-    }
-
-    .round li p{
-        padding:0; margin:2px 0; color:#999; font-size:12px;line-height: 14px;
-    }
-
-
-    .kuang th {
-        color: #333333;padding:0; font-size:16px; font-weight:normal;text-align: left;width: 79px;
-    }
-    .kuang td {
-        color: #999999;padding:0;
-    }
-    .kuang th.thtop{ padding:10px 0 0 0}
-    .kuang td.userinfo{
-        padding:10px;
-    }
-    .round li span .kuang td.userinfo{
-        padding:0 0 1px 10px;color: #666666;
-    }
-    .kuang td.title{
-        padding:10px 0;color: #333333;
-    }
-    .kuang td.price{
-        color: #FF6600; font-size:16px;
-    }
-    .kuang td.price2{
-        color: #1CC200; font-size:16px;
-    }
-    .kuang td.pm{
-        font-size:14px;
-        line-height:20px;
-    }
-    .green{
-        color:#090;
-    }
-    .red{
-        color:#FF6600;
-    }
-    .time{
-        font-size:12px;
-    }
-    .small{
-        font-size:12px;
-    }
-    .detailcontent {
-        border:1px solid #C6C6C6;
-        background-color:rgba(255, 255, 255, 0.9);
-        text-align:left;
-        font-size:14px;
-        line-height:22px;
-        -webkit-border-radius:5px;
-        border-radius:5px;
-        box-shadow:0 1px 1px #f6f6f6;
-        -moz-box-shadow:0 1px 1px #f6f6f6;
-        -webkit-box-shadow:0 1px 1px #f6f6f6;
-        padding:10px;
-        margin-bottom:11px;
-    }
-    .detailcontent h2 {
-        color: #373B3E;
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 20px;
-        padding: 0 0 5px 0;
-        border-bottom:1px solid #C6C6C6;
-        margin-bottom:6px;
-    }
-
-    .detailcontent img {
-        max-width:100%;
-        border:0;
-    }
-    .zongjifen li{
-        width:33%;
-        float:left;
-        display:block;
-    }
-    .zongjifen li p{
-        display:block;
-        text-align:center;
-
-    }
-    .zongjifen li span{
-        display:block;
-        text-align:center;
-    }
-    .zongjifen li .fengexian{
-        border-right: 1px dotted #ccc;
-    }
-    .jifen-box{
-        border:1px solid #C6C6C6;
-        background-color:rgba(255, 255, 255, 0.8);
-        text-align:left;
-        font-size:14px;
-        line-height:24px;
-        -webkit-border-radius:5px;
-        border-radius:5px;
-        box-shadow:0 1px 1px #f6f6f6;
-        padding:10px;
-        margin-bottom:10px;
-        position: relative;
-    }
-    /*login*/
-    .px {
-        position: relative;
-        background-color: transparent;
-        color: #999999;
-        display: block;
-        width: 100%;
-        padding:10px;
-        font-size: 16px;
-        margin:0 auto;
-        font-family:Arial, Helvetica, sans-serif;
-        border:0;
-        -webkit-appearance:none;
-    }
-
-    .px[type="text"] {
-        width: 100%;
-        box-sizing: border-box;
-        -webkit-box-sizing:border-box;
-        -moz-box-sizing: border-box;
-    }
-    .px[type="password"] {
-        width: 100%;
-        box-sizing: border-box;
-        -webkit-box-sizing:border-box;
-        -moz-box-sizing: border-box;
-    }
-    .px[type="button"] {
-        width: 100%;
-        box-sizing: border-box;
-        -webkit-box-sizing:border-box;
-        -moz-box-sizing: border-box;
-    }
-    .pxbtn[type="button"] {
-        width: 100%;
-        box-sizing: border-box;
-        -webkit-box-sizing:border-box;
-        -moz-box-sizing: border-box;
-    }
-    .submit[type="button"] {
-        width: 100%;
-        box-sizing: border-box;
-        -webkit-box-sizing:border-box;
-        -moz-box-sizing: border-box;
-    }
-    .del[type="button"] {
-        width: 100%;
-        box-sizing: border-box;
-        -webkit-box-sizing:border-box;
-        -moz-box-sizing: border-box;
-    }
-    .pxtextarea[type="textarea"] {
-        width: 100%;
-        box-sizing: border-box;
-        -webkit-box-sizing:border-box;
-        -moz-box-sizing: border-box;
-    }
-    .pxtextarea{
-        position: relative;
-        background-color: transparent;
-        color: #999999;
-        display: block;
-        width: 100%;
-        margin:10px 0;
-        font-size: 14px;
-        padding:0 10px;
-        font-family:Arial, Helvetica, sans-serif;
-        border:0;
-        overflow:auto;
-        -webkit-appearance:none;
-    }
-    .pxbtn {
-
-        background: #ff6501;
-        background-image: -webkit-gradient(linear, left top, left bottom, from( #ffa201 ), to( #ff6501 )); /* Saf4+, Chrome */
-        background-image: -webkit-linear-gradient( #ffa201 , #ff6501 ); /* Chrome 10+, Saf5.1+ */
-        background-image:    -moz-linear-gradient( #ffa201 , #ff6501 ); /* FF3.6 */
-        background-image:     -ms-linear-gradient( #ffa201 , #ff6501 ); /* IE10 */
-        background-image:      -o-linear-gradient( #ffa201 , #ff6501 ); /* Opera 11.10+ */
-        background-image:         linear-gradient( #ffa201 , #ff6501 );
-        border: 1px solid #ff6501;
-        border-bottom: 1px solid #d35605;
-        color: #ffffff;
-        font-weight: bold;
-        text-shadow: 0 1px 0 #FFFFFF;
-        border-radius: 0.6em 0.6em 0.6em 0.6em;
-        display: block;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.5);
-        -webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.5);
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        cursor: pointer;
-        text-align: center;
-        font-weight: bold;
-        text-shadow: 0 0 2px #BE4205;
-        font-size: 18px;
-        padding:8px 10px;
-        margin:10px 0 0 0;
-    }
-    .pxbtn:visited {
-        background-image: -webkit-gradient(linear, left top, left bottom, from( #ffa201 ), to( #ff6501 )); /* Saf4+, Chrome */
-        background-image: -webkit-linear-gradient( #ffa201 , #ff6501 ); /* Chrome 10+, Saf5.1+ */
-        background-image:    -moz-linear-gradient( #ffa201 , #ff6501 ); /* FF3.6 */
-        background-image:     -ms-linear-gradient( #ffa201 , #ff6501 ); /* IE10 */
-        background-image:      -o-linear-gradient( #ffa201 , #ff6501 ); /* Opera 11.10+ */
-        background-image:         linear-gradient( #ffa201 , #ff6501 );
-    }
-    .pxbtn:hover {
-        background-image: -webkit-gradient(linear, left top, left bottom, from( #ff7f01 ), to( #ff6501 )); /* Saf4+, Chrome */
-        background-image: -webkit-linear-gradient( #ff7f01 , #ff6501 ); /* Chrome 10+, Saf5.1+ */
-        background-image:    -moz-linear-gradient( #ff7f01 , #ff6501 ); /* FF3.6 */
-        background-image:     -ms-linear-gradient( #ff7f01 , #ff6501 ); /* IE10 */
-        background-image:      -o-linear-gradient( #ff7f01 , #ff6501 ); /* Opera 11.10+ */
-        background-image:         linear-gradient( #ff7f01 , #ff6501 );
-    }
-    .pxbtn:active {
-        background-image: -webkit-gradient(linear, left top, left bottom, from( #ff6501 ), to( #ffa201 )); /* Saf4+, Chrome */
-        background-image: -webkit-linear-gradient( #ff6501 , #ffa201 ); /* Chrome 10+, Saf5.1+ */
-        background-image:    -moz-linear-gradient( #ff6501 , #ffa201 ); /* FF3.6 */
-        background-image:     -ms-linear-gradient( #ff6501 , #ffa201 ); /* IE10 */
-        background-image:      -o-linear-gradient( #ff6501 , #ffa201 ); /* Opera 11.10+ */
-        background-image:         linear-gradient( #ff6501 , #ffa201 );
-        border: 1px solid #ff6501;
-        border-top: 1px solid #d35605;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) inset;
-    }
-    input::-moz-placeholder, textarea::-moz-placeholder { color: #cccccc;}
-
-
-    .dropdown-option {color: #999;background-color: transparent;}
-
-    /* End Dropdown Select */
-    .roundyellow {
-        background-color:#ffe156;
-        text-decoration:none;
-        border:1px solid #D2BD85;
-        background-image: linear-gradient(bottom,  #ffe156 0%, #fff5cb 100%);
-        background-image: -o-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -moz-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -webkit-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -ms-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #ffe156),
-            color-stop(1, #fff5cb)
-        );
-        -webkit-box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.15);
-        -moz-box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.15);
-        box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.15);
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -o-border-radius: 5px;
-        border-radius: 5px;
-        display:block;
-    }
-    ul.roundyellow {
-        background-color:#ffe156;
-        text-decoration:none;
-        border:1px solid #D2BD85;
-        background-image: linear-gradient(bottom,  #ffe156 0%, #fff5cb 100%);
-        background-image: -o-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -moz-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -webkit-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -ms-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #ffe156),
-            color-stop(1, #fff5cb)
-        );
-        -webkit-box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.1);
-        -moz-box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.1);
-        box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.1);
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -o-border-radius: 5px;
-        border-radius: 5px;
-        display:block;
-    }
-    .beizhu{
-        border:1px solid #EDE17E;
-        background-color: #FFF5C5;
-        text-align: center;
-        color: #BCA24B;
-        font-size:14px;
-        line-height:22px;
-        -webkit-border-radius:5px;
-        border-radius:5px;
-        box-shadow:0 1px 1px #f6f6f6;
-        -moz-box-shadow:0 1px 1px #f6f6f6;
-        -webkit-box-shadow:0 1px 1px #f6f6f6;
-        padding: 4px 10px 5px;
-        margin: 11px 0 8px;
-    }
-    .footReturn {
-        display: block;
-        margin: 11px auto;
-        padding: 0;
-        position: relative;
-    }
-    .footerbtn{ width:50%; float:left;}
-    .right3{ margin-right:3px}
-    .left3{ margin-left:3px}
-    .vm {
-        vertical-align: middle;
-    }
-    .submit {
-        background-color:#179F00;
-        padding:10px 20px;
-        font-size:16px;
-        text-decoration:none;
-        border:1px solid #0B8E00;
-        background-image: linear-gradient(bottom,  #179F00 0%, #5DD300 100%);
-        background-image: -o-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
-        background-image: -moz-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
-        background-image: -webkit-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
-        background-image: -ms-linear-gradient(bottom, #179F00 0%, #5DD300 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #179F00),
-            color-stop(1, #5DD300)
-        );
-        -webkit-box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
-        -moz-box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
-        box-shadow: 0 1px 0 #94E700 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -o-border-radius: 5px;
-        border-radius: 5px;
-        color: #ffffff;
-        display:block;
-        text-align:center;
-        text-shadow:0 1px rgba(0, 0, 0, 0.2);
-    }
-    .submit:active {
-        padding-bottom:9px;
-        padding-left:20px;
-        padding-right:20px;
-        padding-top:11px;
-        top:0px;
-        background-image: linear-gradient(bottom, #5DD300 0%, #179F00 100%);
-        background-image: -o-linear-gradient(bottom,  #5DD300 0%, #179F00 100%);
-        background-image: -moz-linear-gradient(bottom,  #5DD300 0%, #179F00 100%);
-        background-image: -webkit-linear-gradient(bottom,  #5DD300 0%, #179F00 100%);
-        background-image: -ms-linear-gradient(bottom,  #5DD300 0%, #179F00 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #5DD300),
-            color-stop(1, #179F00)
-        );
-        -webkit-box-shadow: 0 1px 0 #5DD300 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
-        -moz-box-shadow: 0 1px 0 #5DD300 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
-        box-shadow: 0 1px 0 #5DD300 inset, 0 1px 2px rgba(0, 0, 0, 0.5);
-    }
-    .submit img{ width:15px; margin:-4px 10px 0 0;}
-    .del{
-        background-color:#F4F4F4;
-        padding:10px 20px;
-        font-size:16px;
-        text-decoration:none;
-        border:1px solid #ABABAB;
-        background-image: linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -o-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -moz-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -webkit-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -ms-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #E1E1E1),
-            color-stop(1, #ffffff)
-        );
-        -webkit-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 2px rgba(0, 0, 0, 0.25);
-        -moz-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 2px rgba(0, 0, 0, 0.25);
-        box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 2px rgba(0, 0, 0, 0.25);
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -o-border-radius: 5px;
-        border-radius: 5px;
-        color: #666666;
-        display:block;
-        text-align:center;
-        text-shadow:0 1px #FFF;
-    }
-    .del:active {
-        padding-bottom:9px;
-        padding-left:20px;
-        padding-right:20px;
-        padding-top:11px;
-        top:0px;
-        background-image: linear-gradient(bottom, #ffffff 0%, #E1E1E1 100%);
-        background-image: -o-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -moz-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -webkit-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -ms-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #ffffff),
-            color-stop(1, #E1E1E1)
-        );
-        -webkit-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 2px rgba(0, 0, 0, 0.25);
-        -moz-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 2px rgba(0, 0, 0, 0.25);
-        box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 2px rgba(0, 0, 0, 0.25);
-    }
-    .del img{ width:15px;width:15px; margin:-4px 10px 0 0;}
-    .submit2 {
-        background-color:#ffe156;
-        padding:10px 20px;
-        font-size:16px;
-        text-decoration:none;
-        border:1px solid #D2BD85;
-        background-image: linear-gradient(bottom,  #ffe156 0%, #fff5cb 100%);
-        background-image: -o-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -moz-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -webkit-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -ms-linear-gradient(bottom, #ffe156 0%, #fff5cb 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #ffe156),
-            color-stop(1, #fff5cb)
-        );
-        -webkit-box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.15);
-        -moz-box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.15);
-        box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.15);
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -o-border-radius: 5px;
-        border-radius: 5px;
-        color: #333;
-        display:block;
-        text-align:center;
-        text-shadow: 0 1px rgba(255, 255, 255, 0.5);
-    }
-    .submit2:active {
-        padding-bottom:9px;
-        padding-left:20px;
-        padding-right:20px;
-        padding-top:11px;
-        top:0px;
-        background-image: linear-gradient(bottom, #fff5cb 0%, #ffe156 100%);
-        background-image: -o-linear-gradient(bottom,  #fff5cb 0%, #ffe156 100%);
-        background-image: -moz-linear-gradient(bottom,  #fff5cb 0%, #ffe156 100%);
-        background-image: -webkit-linear-gradient(bottom,  #fff5cb 0%, #ffe156 100%);
-        background-image: -ms-linear-gradient(bottom,  #fff5cb 0%, #ffe156 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #fff5cb),
-            color-stop(1, #ffe156)
-        );
-        -webkit-box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.15);
-        -moz-box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.15);
-        box-shadow: 0 1px 1px #fff3c2 inset, 0 1px 2px rgba(0, 0, 0, 0.15);
-    }
-    .submit2 img{ width:15px; margin:-4px 10px 0 0;}
-    .receive {
-        background-color:#F4F4F4;
-        padding:10px 20px;
-        font-size:16px;
-        text-decoration:none;
-        border:1px solid #C6C6C6;
-        background-image: linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -o-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -moz-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -webkit-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -ms-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #E1E1E1),
-            color-stop(1, #ffffff)
-        );
-        -webkit-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 0 #EEEEEE;
-        -moz-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 0 #EEEEEE;
-        box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 0 #EEEEEE;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -o-border-radius: 5px;
-        border-radius: 5px;
-        color: #666666;
-        display:block;
-        text-align:center;
-        text-shadow:0 1px rgba(0, 0, 0, 0.2);
-    }
-
-    .receive:before {
-        background-image: linear-gradient(bottom, rgba(255, 255, 255, 0.41) 0%, #E1E1E1 100%);
-        background-image: -o-linear-gradient(bottom, rgba(255, 255, 255, 0.41) 0%, #E1E1E1 100%);
-        background-image: -moz-linear-gradient(bottom, rgba(255, 255, 255, 0.41) 0%, #E1E1E1 100%);
-        background-image: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.41) 0%, #E1E1E1 100%);
-        background-image: -ms-linear-gradient(bottom, rgba(255, 255, 255, 0.41) 0%, #E1E1E1 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, rgba(255, 255, 255, 0.41)),
-            color-stop(1, #E1E1E1)
-        );
-        content:"";
-        display:block;
-        position:absolute;
-        width:100%;
-        height:100%;
-        padding:5px;
-        left:-5px;
-        top:-6px;
-        z-index:-1;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -o-border-radius: 5px;
-        border-radius: 5px;
-        -webkit-box-shadow: 0 1px 1px rgba(144, 145, 147, 0.21) inset, 0 1px 0 rgba(255, 255, 255, 0.57);
-        -moz-box-shadow: 0 1px 1px rgba(144, 145, 147, 0.21) inset, 0 1px 0 rgba(255, 255, 255, 0.57);
-        -o-box-shadow:0 1px 1px rgba(144, 145, 147, 0.21) inset, 0 1px 0 rgba(255, 255, 255, 0.57);
-        box-shadow:0 1px 1px rgba(144, 145, 147, 0.21) inset, 0 1px 0 rgba(255, 255, 255, 0.57);
-    }
-
-    .receive:active {
-        padding-bottom:9px;
-        padding-left:20px;
-        padding-right:20px;
-        padding-top:11px;
-        top:0px;
-        background-image: linear-gradient(bottom, #ffffff 0%, #E1E1E1 100%);
-        background-image: -o-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -moz-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -webkit-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -ms-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #ffffff),
-            color-stop(1, #E1E1E1)
-        );
-        -webkit-box-shadow: 0 1px 0 #E1E1E1 inset, 0 1px 1px #F6F6F6;
-        -moz-box-shadow: 0 1px 0 #E1E1E1 inset, 0 1px 1px #F6F6F6;
-        box-shadow: 0 1px 0 #E1E1E1 inset, 0 1px 1px #F6F6F6;
-    }
-
-    /*window*/
-    .window {
-        width:267px;
-        position:absolute;
-        display:none;
-        margin:0px auto 0 -136px;
-        padding:2px;
-        bottom:60px;
-        left:50%;
-        border-radius:0.6em;
-        -webkit-border-radius:0.6em;
-        -moz-border-radius:0.6em;
-        background-color: #f1f1f1;
-        -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        font:14px/1.5 Microsoft YaHei, Helvitica, Verdana, Arial, san-serif;
-        z-index:10;
-    }
-    .window .wtitle {
-        background-color: #585858;
-        line-height: 26px;
-        padding: 5px 5px 5px 10px;
-        color:#ffffff;
-        font-size:16px;
-        border-radius:0.5em 0.5em 0 0;
-        -webkit-border-radius:0.5em 0.5em 0 0;
-        -moz-border-radius:0.5em 0.5em 0 0;
-    }
-    .window .content {
-        /*min-height:100px;*/
-        overflow:auto;
-        padding:10px;
-        color: #222222;
-        text-shadow: 0 1px 0 #FFFFFF;
-    }
-    .window #txt {
-        min-height:30px;
-        font-size:14px;
-        line-height:20px;
-    }
-    .window .content p {
-        margin:10px 0 0 0;
-    }
-
-    .window .wtitle .close {
-        float:right;
-        background-image: url("img/QJ8o7KOek84fkCWSBtfLNy2MPpCkPFMH6PWEhWhKncIyEk69VfiUuVhqJefdsYcwNbEwxGqGIFWYAAAAASUVORK5CYII=");
-        width:26px;
-        height:26px;
-        display:block;
-    }
-    #overlay {
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background:#000000;
-        opacity:0.5;
-        filter:alpha(opacity=0);
-        display:none;
-        z-index: 9;
-    }
-
-    /*page*/
-    .pagination{
-        margin: 0 auto;
-        text-align: center;
-        text-align: center;
-        min-width:301px;
-    }
-    .pagination a {
-        margin: 0 ;
-        padding: 6px 27px;
-        border:1px solid #D1D1D1;
-        background:#fefefe;
-        border:1px solid #ABABAB;
-        background-image: linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -o-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -moz-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -webkit-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -ms-linear-gradient(bottom, #E1E1E1 0%, #ffffff 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #E1E1E1),
-            color-stop(1, #ffffff)
-        );
-        -webkit-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 1px rgba(0, 0, 0, 0.1);
-        -moz-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 1px rgba(0, 0, 0, 0.1);
-        box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 1px rgba(0, 0, 0, 0.1);
-        -webkit-border-radius:5px;
-        -moz-border-radius:5px;
-        border-radius:5px;
-        color:#666;
-        text-shadow:0 1px #fff;
-        display:block;
-    }
-    .pagination a:hover {
-        background-image: linear-gradient(bottom, #F5F2F2 0%, #ffffff 100%);
-        background-image: -o-linear-gradient(bottom, #F5F2F2 0%, #ffffff 100%);
-        background-image: -moz-linear-gradient(bottom, #F5F2F2 0%, #ffffff 100%);
-        background-image: -webkit-linear-gradient(bottom, #F5F2F2 0%, #ffffff 100%);
-        background-image: -ms-linear-gradient(bottom, #F5F2F2 0%, #ffffff 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #F5F2F2),
-            color-stop(1, #ffffff)
-        );
-    }
-    .pagination a:active {
-        background-image: linear-gradient(bottom, #ffffff 0%, #E1E1E1 100%);
-        background-image: -o-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -moz-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -webkit-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -ms-linear-gradient(bottom,  #ffffff 0%, #E1E1E1 100%);
-        background-image: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0, #ffffff),
-            color-stop(1, #E1E1E1)
-        );
-        -webkit-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 2px rgba(0, 0, 0, 0.25);
-        -moz-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 2px rgba(0, 0, 0, 0.25);
-        box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 2px rgba(0, 0, 0, 0.25);
-    }
-    .pagination .disabled a, .pagination .disabled a:hover {
-        background:none;
-        border:1px solid #cbcbcb;
-        -webkit-box-shadow:none;
-        -moz-box-shadow:none;
-        box-shadow:none;
-        color:A4A3A3;
-    }
-    .pagination .allpage{
-        position: relative;
-        text-align: center;
-        vertical-align: baseline;
-        display: inline-block;
-    }
-    .pagination .currentpage{
-        line-height: 36px;
-        width: 80px;
-    }
-    #dropdown-select{position:absolute;
-        top:0;
-        left:0;
-        height:36px;
-        width:80px;
-        opacity:0;
-    }
-    .pagination .left{ float:left}
-    .pagination .right{ float:right}
-
-
-    /*iscroll*/
-
-    .banner {
-        width:100%;
-        margin:0 auto;
-        padding:0;overflow: hidden;
-        background-color: #333333;
-    }
-    #wrapper {
-        margin:0;
-        width:100%;
-        height:auto;
-        float:left;
-        position:relative;	/* On older OS versions "position" and "z-index" must be defined, */
-        z-index:1;			/* it seems that recent webkit is less picky and works anyway. */
-        overflow:hidden;
-
-    }
-
-    #scroller {
-        height:auto;
-        float:left;
-        padding:0;
-    }
-
-    #scroller ul {
-        list-style:none;
-        display:block;
-        float:left;
-        width:100%;
-        height:auto;
-        padding:0;
-        margin:0;
-        text-align:left;
-    }
-
-    #scroller li {
-
-        display:block; float:left;
-        width:auto; height:auto;
-        text-align:center;
-        font-size:0px;
-        padding:0;
-        position:relative;
-    }
-    #scroller li a{
-
-        display:block;
-        padding:0;
-        margin:0;
-    }
-    #scroller li p{
-        position:absolute;
-        z-index:2;
-        display:block;
-        width:100%;
-        bottom:0;
-        background-color:rgba(0, 0, 0, 0.5);
-        color:#F4F4F4;
-        font-size:14px;
-        text-indent: 55px;
-        line-height:24px;
-        text-align: left;
-        text-indent: 10px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        padding:0;
-        margin:0;
-    }
-    #nav {
-        float: right;
-        margin-top: -15px;
-        padding: 0;
-        position: relative;
-        width: auto;
-        z-index: 3;
-    }
-
-    #prev, #next {
-        float:left;
-        font-weight:bold;
-        font-size:14px;
-        padding:5px 0;
-        width:80px;
-        display: none;
-    }
-
-    #next {
-        float:right;
-        text-align:right;
-    }
-
-    #indicator > li {
-        display:block; float:left;
-        list-style:none;
-        padding:0; margin:0;
-    }
-
-    #indicator {
-        display: block;
-        margin: 0 8px;
-        padding: 0;
-        width: auto;
-    }
-
-    #indicator > li {
-        text-indent:-9999em;
-        width:8px; height:8px;
-        -webkit-border-radius:4px;
-        -moz-border-radius:4px;
-        -o-border-radius:4px;
-        border-radius:4px;
-        background:#888;
-        overflow:hidden;
-        margin-right:4px;
-    }
-
-    #indicator > li.active {
-        background:#DDDDDD;
-    }
-
-    #indicator > li:last-child {
-        margin:0;
-    }
-
-</style>
-<script language="javascript">
-    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-        WeixinJSBridge.call('hideOptionMenu');
     });
-    function callpay()
-    {
-        WeixinJSBridge.invoke(
-            'getBrandWCPayRequest',
-            {$url},
-            function(res){
-                WeixinJSBridge.log(res.err_msg);
-                if(res.err_msg=='get_brand_wcpay_request:ok')
-                {
-                    document.getElementById('payDom').style.display='none';
-                    document.getElementById('successDom').style.display='';
-                    //setTimeout("window.location.href = '{$returnUrl}'",2000);
-                    window.location.href = '{$returnUrl}';
-                }
-                else
-                {
-                    document.getElementById('payDom').style.display='none';
-                    document.getElementById('failDom').style.display='';
-                    //document.getElementById('failRt').innerHTML=res.err_code+'|'+res.err_desc+'|'+res.err_msg;
-                }
-            });
-    }
 
 </script>
 
-<div class="cardexplain"  style="margin:0;padding:0;">
-    <ul class="round" style="margin:0;padding:0;border-radius:0;border:0px;border-bottom:1px solid #C6C6C6">
-        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
-            <tr>
-                <td> <span>订单详情</span> <!--span style='float:right'><a href='./index.php?g=App&m=Index&a=index_info'>继续购物>>></a></span--> </td>
+
+<div id="member-container" style="display: none;">
+
+    <div class="menu_header">
+        <div class="menu_topbar">
+            <div id="menu" class="sort ">
+                <a href="">分销详情</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="div_header">
+			<span style="float:left;margin-left:10px;margin-right:10px;">
+				<img src="/Application/Tpl/App/default/Public/Static/images/defult.jpg" width="70px;" height="70px;">			</span>
+        <span class="header_right">
+				<div class="header_l_di">
+					<span>昵称：fq5830571</span>&nbsp;&nbsp;
+					&lt;<a style="color:red" href="./index.php?g=App&amp;m=Member&amp;a=index&amp;uid=50002">账号设置</a>&gt;
+				</div>
+            <!--<div><span>合伙人：否(<a style='color:red'
+                                                                           href='./index.php?g=App&m=Index&a=index'>点击链接成为合伙人</a>)</span></div>-->
+				<div><span>注册时间：2018-08-13&nbsp;&nbsp;<a style="color:red"
+                                                         href="./index.php?g=App&amp;m=Member&amp;a=logout">退出登录</a>&gt;</span></div>
+				<div><span> 会员ID：50002
+				   </span></div>
+    </span></div>
+
+    <div class="div_table">
+        <table style="height:35px;text-align:center;background-color:#e61945;border:0px" border="0">
+            <tbody>
+            <tr style="border:0px" border="0">
+                <td style="background-color:#e61945;">销售额：0元</td>
+                <td style="border-left:1px solid #fff;background-color:#e61945;">我的佣金：0.00元</td>
             </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="cardexplain" style="TEXT-ALIGN: center;color:#000;font-size:14px;">您是由【总裁】推荐</div>
+    <div class="cardexplain" style="TEXT-ALIGN: center;color:#006400;font-size:13px;">
+        <!--<marquee scrollamount=1 scrolldelay=7 direction=left>欢迎使用直销360分销系统</marquee>-->
+    </div>
+    <div class="cardexplain">
+        <div class="div_ul" id="all_cnt"><span><img style="margin-left:5px;"
+                                                    src="/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png">我的下级</span><span
+                    class="bg_total">2 人</span></div>
+        <ul class="round">
+            <li class="member_cnt" style=""><a
+                        href="http://www.fenxiao.dev/index.php?g=App&amp;m=Index&amp;a=member_info&amp;type=1&amp;id=50002"><span><img
+                                style="width:20px;height:20px;"
+                                src="/Application/Tpl/App/default/Public/Static/images/bullet_blue_expand.png">一级会员<span
+                                style="float:right;color:red;">2</span></span></a></li>
+            <li class="member_cnt"><a
+                        href="http://www.fenxiao.dev/index.php?g=App&amp;m=Index&amp;a=member_info&amp;type=2&amp;id=50002"><span><img
+                                style="width:20px;height:20px;"
+                                src="/Application/Tpl/App/default/Public/Static/images/bullet_blue_expand.png">二级会员<span
+                                style="float:right;color:red;">0</span></span></a></li>
+            <!-- <li class="member_cnt"><a href="http://www.fenxiao.dev/index.php?g=App&m=Index&a=member_info&type=3&id=50002"><span><img style="width:20px;height:20px;"
+                                                                       src="/Application/Tpl/App/default/Public/Static/images/bullet_blue_expand.png">三级会员<span
+                     style="float:right;color:red;">0</span></span></a></li>-->
+        </ul>
+    </div>
+
+    <div class="cardexplain">
+
+        <div class="div_ul" id="all_buy"><span><img style="margin-left:5px;"
+                                                    src="/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png">家族推广<span
+                        class="bg_total">0 单</span></span></div>
+        <ul class="round">
+            <li class="buy_cnt"><span>下单未购买<span style="float:right;color:red;">0</span></span></li>
+            <li class="buy_cnt"><span>下单已购买<span style="float:right;color:red;">0</span></span></li>
+        </ul>
+    </div>
+
+
+    <div class="cardexplain">
+        <div class="div_ul" id="all_price"><span><img style="margin-left:5px;"
+                                                      src="/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png">我的佣金<span
+                        class="bg_total">0.00 元</span></span></div>
+        <ul class="round">
+            <li class="price_cnt"><span>未付款定单佣金<span style="float:right;color:red;">0</span></span></li>
+            <li class="price_cnt"><span>已付款定单佣金<span style="float:right;color:red;">0</span></span></li>
+            <li class="price_cnt"><span>已收货定单佣金<span style="float:right;color:red;">0</span></span></li>
+            <li class="price_cnt"><span>已完成定单佣金<span style="float:right;color:red;">0</span></span></li>
+            <li class="price_cnt"><span>待审核提现佣金<span style="float:right;color:red;">0</span></span>
+            </li>
+            <li class="price_cnt"><span>已提现佣金<span style="float:right;color:red;">0</span></span></li>
+            <li class="price_cnt"><span>可提现佣金<span style="float:right;color:red;">0.00</span></span></li>
+        </ul>
+    </div>
+    <!--<div class="cardexplain">
+        <div class="div_ul" onClick="$('#tx').click();"><span><img style='margin-left:5px;'
+                                                                   src="/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png">申请提现</span>
+        </div>
+    </div>-->
+    <div class="cardexplain">
+        <div class="div_ul" id="memeber_url"><span><img style="margin-left:5px;"
+                                                        src="/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png">分享链接</span>
+        </div>
+        <span class="memeber_url" style="display:none;">http://www.fenxiao.dev/index.php?g=App&amp;m=Member&amp;a=register&amp;mid=50002</span>
+    </div>
+    <div class="cardexplain">
+        <a href="./index.php?g=App&amp;m=Index&amp;a=member_top&amp;id=50002">
+            <div class="div_ul" id="top_url"><span><img style="margin-left:5px;"
+                                                        src="/Application/Tpl/App/default/Public/Static/images/arrow_unclick.png">销售排行榜</span>
+            </div>
+        </a>
+    </div>
+    <div style="text-align:center;"></div>
+</div>
+
+<div id="ticket-container" style="display: none;">
+    <img src="./imgpublic/hongmeiqi.jpg" style="width:100%">
+</div>
+
+<div id="tx-container" style="display: none;">
+
+    <div class="menu_header">
+        <div class="menu_topbar">
+            <div id="menu" class="sort ">
+                <a href="">申请提现</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="div_header">
+			<span style="float:left;margin-left:10px;margin-right:10px;">
+				<img src="/Public/Static/images/defult.jpg" width="70px;" height="70px;">			</span>
+        <span class="header_right">
+				<div><span>昵称：fq5830571</span></div>
+				<div><span>合伙人：否(<a style="color:red"
+                                    href="./index.php?g=App&amp;m=Index&amp;a=index">点击链接成为合伙人</a>)</span></div>
+				<div><span>关注时间：2018-08-13</span></div>
+				<div><span>会员ID：50002  </span></div>
+			</span>
+    </div>
+
+    <section class="order">
+        <form name="txinfoForm" id="txinfoForm" method="post" action="">
+            <div class="contact-info">
+                <ul>
+                    <li class="title">提现信息</li>
+                    <li>
+                        <table style="padding: 0; margin: 0; width: 100%;">
+                            <tbody>
+                            <tr>
+                                <td width="80px"><label for="price" class="ui-input-text">提现金额：</label></td>
+                                <td>
+                                    <div class="ui-input-text">
+                                        <input id="price" name="price" placeholder="" value="0.00" type="text"
+                                               class="ui-input-text">
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="80px"><label for="bank_name" class="ui-input-text">开户行：</label></td>
+                                <td>
+                                    <div class="ui-input-text">
+                                        <input id="bank_name" name="bank_name" placeholder="" value="" type="text"
+                                               class="ui-input-text">
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="80px"><label for="bank_num" class="ui-input-text">开户账号：</label></td>
+                                <td>
+                                    <div class="ui-input-text">
+                                        <input id="bank_num" name="bank_num" placeholder="" value="" type="text"
+                                               class="ui-input-text">
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="80px"><label for="name" class="ui-input-text">开户人姓名：</label></td>
+                                <td>
+                                    <div class="ui-input-text">
+                                        <input id="name" name="name" placeholder="" value="" type="text"
+                                               class="ui-input-text">
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="80px"><label for="bank_name" class="ui-input-text">电话</label></td>
+                                <td>
+                                    <div class="ui-input-text">
+                                        <input id="tel" name="tel" placeholder="" value="" type="tel"
+                                               class="ui-input-text">
+                                    </div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div class="footReturn">
+                            <a id="txshowcard" class="submit" href="javascript:submitTxOrder();">确定提交</a>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </section>
+
+    <!-- 正在提交数据 -->
+    <div id="tx-menu-shadow" hidefocus="true" style="display: none; z-index: 10;">
+        <div class="btn-group"
+             style="position: fixed; font-size: 12px; width: 220px; bottom: 80px; left: 50%; margin-left: -110px; z-index: 999;">
+            <div class="del" style="font-size: 14px;">
+                <img src="/Application/Tpl/App/default/Public/Static/images/ajax-loader.gif" alt="loader">正在提交申请...
+            </div>
+        </div>
+    </div>
+
+    <ul class="round">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
+            <tbody>
+            <tr>
+                <th>编号</th>
+                <th class="cc">金额</th>
+                <th class="cc">状态</th>
+            </tr>
+            </tbody>
+            <tbody>
+            </tbody>
         </table>
     </ul>
+
+
 </div>
 
 
-<div class="cardexplain" style="margin-bottom: 0px;">
-    <ul class="round"  style="margin-left:0;margin-right:0;">
-        <li class="title mb"><span class="none">收货人信息</span></li>
-        <li class="nob">
-            <table>
-                <tr><td>联系人：{$username}</td></tr>
-                <tr><td>联系电话：{$phone}</td></tr>
-                <tr><td>联系地址：{$address}</td></tr>
-            </table>
-    </ul>
-</div>
+<div id="user-container" style="">
 
-<div class="cardexplain">
-    <ul class="round" style="margin-left:0;margin-right:0;">
-        <li class="title mb"><span class="none">产品信息</span></li>
-        <li class="nob">
-            <table>
-                <tr><!--<td><img width='70' height='70' src='../Public/Static/images/chanpininfo.jpg'></td>-->
-                    <td><table>
-                            <tr><td>{$cart_name}<td></tr>
-                            <tr><td>￥{$cart_price} * {$cart_num}<td></tr>
-                        </table></td>
+    <div class="menu_header">
+        <div class="menu_topbar">
+            <div id="menu" class="sort ">
+                <a href="">查看我的订单</a>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <ul class="round" style="margin:0;padding:0;border-radius:0;border:0px;border-bottom:1px solid #C6C6C6">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
+                <tbody>
+                <tr>
+                    <td><span>订单详情</span> <span style="float:right"><a href='javascript:$("#ticket").click();'
+                                                                       style="color:red;">获取推广二维码&gt;&gt;&gt;</a></span>
+                    </td>
                 </tr>
+                </tbody>
             </table>
-            <div style='text-align:center;color:red;'>购物合计总金额：{$price}元</div>
-    </ul>
-</div>
+        </ul>
+    </div>
 
-
-
-<div id="payDom"class="cardexplain">
-    <div class="footReturn"style="text-align:center">
-        <input type="button"style="margin:0 auto 20px auto;width:100%"onclick="callpay()"class="submit"value="微信支付"/>
+    <div class="cardexplain">
+        <div id="page_tag_load" hidefocus="true" style="z-index: 10; display: none;">
+            <div class="btn-group"
+                 style="position: fixed; font-size: 12px; width: 220px; bottom: 80px; left: 50%; margin-left: -110px; z-index: 999;">
+                <div class="del" style="font-size: 14px;">
+                    <img src="/Application/Tpl/App/default/Public/Static/images/ajax-loader.gif" alt="loader">正在获取订单...
+                </div>
+            </div>
+        </div>
+        <ul class="round" id="orderlistinsert" style="color:#000;font-size:12px;">
+            <?php foreach ($orderList as $order){?>
+            <li style="border: 1px solid #d0d0d0;border-radius: 10px;margin-bottom:10px;background-color:#FFF;">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td style="border-bottom:0px">订单编号:<?=$order['order_sn']?></td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom:0px">订单金额:<?=$order['amount']?>元</td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom:0px">订单时间:<?=date('Y-m-d H:i:s',$order['created_time'])?></td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom:0px">支付状态:<em class="no"><a
+                                        href="javascript:void(0)"><?=$order['status'] == 1?'已支付':'未支付'?>去支付</a></em>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </li>
+            <?php }?>
+        </ul>
     </div>
 </div>
-<div id="failDom"style="display:none"class="cardexplain">
-    <ul class="round">
-        <li class="title mb"><span class="none">支付结果</span></li>
-        <li class="nob">
-            <table width="100%"border="0"cellspacing="0"cellpadding="0"class="kuang">
-                <tr><th>支付失败</th><td><div id="failRt"></div></td></tr>
-            </table>
-        </li>
-    </ul>
-    <div class="footReturn"style="text-align:center">
-        <input type="button"style="margin:0 auto 20px auto;width:100%"onclick="callpay()"class="submit"value="重新进行支付"/>
-    </div>
-</div>
-<div id="successDom"style="display:none"class="cardexplain">
-    <ul class="round"><li class="title mb"><span class="none">支付成功</span></li>
-        <li class="nob">
-            <table width="100%"border="0"cellspacing="0"cellpadding="0"class="kuang">
-                <tr><th>您已支付成功，页面正在跳转...</td></tr>
-            </table>
-            <div id="failRt"></div>
-            <!--/td></tr></table-->
-        </li>
+
+<div class="footermenu">
+    <ul>
+        <li><a href="./index.php?r=site/goods-list-view"> <img src="../Public/Static/images/21.png">
+                <p>立即购买</p>
+            </a></li>
+        <li id="user"><a href="javascript:void(0);"> <img src="../Public/Static/images/22.png">
+                <p>我的订单</p>
+            </a></li>
+        <!--<li id="member"><a href="javascript:void(0);" class="active"> <img src="../Public/Static/images/23.png">
+                <p>销售业绩</p>
+            </a></li>-->
+        <li id="ticket"><a href="javascript:void(0);"> <img src="../Public/Static/images/24.png">
+                <p>我的二维码</p>
+            </a></li>
     </ul>
 </div>
+<script>
+    window.onload = function () {
+        if ($_GET['page_type'] == 'order') {
+            user();
+        }
+    }
+</script>
+
 </body>
 </html>

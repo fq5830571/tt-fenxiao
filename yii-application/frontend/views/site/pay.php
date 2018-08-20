@@ -206,9 +206,11 @@
                 dataType: 'json',
                 success: function (data) {
                     alert(data.msg);
-                    if (data.code == 200) {
-                       location.reload();
-                    }
+                    setTimeout(function () {
+                        if (data.code == 200) {
+                            location.reload()
+                        }
+                    },2000)
                 }
             });
         })

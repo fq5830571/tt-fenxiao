@@ -39,7 +39,7 @@
         <ul class="i_ul rel" id="hot_ul">
             <?php foreach ($goodsList as $goods) { ?>
 
-                <li class="i_li left"><a href="index.php?g=App&m=Index&a=index_info&id='.$a['id'].'"><img width="293"
+                <li class="i_li left"><a href="/index.php?r=site/pay-view&id=<?=$goods['id']?>"><img width="293"
                                                                                                           height="370"
                                                                                                           src="<?= $goods['image'] ?>">
                         <div class="i_li_img_div abs wrap">
@@ -146,8 +146,8 @@
                             style="color:#00cf31;font-size:12px;"><?=$user['name']?></span><br><span style="font-size:12px;">购买即可升级会员等级,提高佣金基数</span>
                 </div>
             </div>
-            <a class="button_buy" href="index.php?g=App&amp;m=Index&amp;a=index&amp;id=1"><p style="line-height: 3em;">
-                    <span style="padding:5px;border:1px solid #00cf31;"><strong>立即购买</strong></span></p></a></li>
+            <!--<a class="button_buy" href="index.php?g=App&amp;m=Index&amp;a=index&amp;id=1"><p style="line-height: 3em;">
+                    <span style="padding:5px;border:1px solid #00cf31;"><strong>立即购买</strong></span></p></a></li>-->
     </ul>
 </div>
 </body>

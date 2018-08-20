@@ -38,7 +38,7 @@ $this->title = '后台首页';
             <li class="layui-nav-item">
                 <a href="javascript:;"><i class="iconfont">&#xe608;</i>佣金管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:;" data-url="/index.php?r=admin/bonus-view" data-id='9' data-text="佣金管理"><span class="l-line"></span>佣金管理</a></dd>
+                    <dd><a href="javascript:;" data-url="/index.php?r=admin/bonus-view" data-id='10' data-text="佣金管理"><span class="l-line"></span>佣金管理</a></dd>
                 </dl>
             </li>
             <!--<li class="layui-nav-item">
@@ -94,7 +94,7 @@ $this->title = '后台首页';
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
                         <!--1-->
-                        <iframe src="welcome.html" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
+                        <iframe src="/index.php?r=admin/home" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe" framborder="0"></iframe>
                         <!--1end-->
                     </div>
                 </div>

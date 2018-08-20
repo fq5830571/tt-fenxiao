@@ -22,38 +22,24 @@ $(document).ready(function () {
 		$(this).children("a").attr("class","active");
 	});
 	$('#home').on('click' , function (){
-		$('#menu-container').show();
-		$('#cart-container').hide();
-		$('#user-container').hide();
-		
-		$(".footermenu ul li a").each(function(){
-			$(this).attr("class","");
-		});
-		$(this).children("a").attr("class","active");
+        window.location.href = '/index.php?r=site/index';
 	});
 	
 	
 	$('#ticket').on('click' , function (){
-		$('#tx-container').hide();
+		/*$('#tx-container').hide();
 		$('#member-container').hide();
 		$('#user-container').hide();
 		$('#ticket-container').show();
 		$(".footermenu ul li a").each(function(){
 			$(this).attr("class","");
 		});
-		$(this).children("a").attr("class","active");
+		$(this).children("a").attr("class","active");*/
+		window.location.href = '/index.php?r=member/qrcode';
 	})
 	
 	$('#member').on('click' , function (){
-		$('#tx-container').hide();
-		$('#ticket-container').hide();
-		$('#user-container').hide();
-		$('#member-container').show();
-		
-		$(".footermenu ul li a").each(function(){
-			$(this).attr("class","");
-		});
-		$(this).children("a").attr("class","active");
+        window.location.href = '/index.php?r=member/order';
 	})
 	
 	$('#tx').on('click' , function (){
@@ -69,91 +55,7 @@ $(document).ready(function () {
 	})
 	
 	$('#user').on('click' , function (){
-		$('#menu-container').hide();
-		$('#cart-container').hide();
-		$('#ticket-container').hide();
-		$('#member-container').hide();
-		$('#tx-container').hide();
-		$('#user-container').show();
-
-		$(".footermenu ul li a").each(function(){
-			$(this).attr("class","");
-		});
-		$(this).children("a").attr("class","active");
-
-		$.ajax({
-			type : 'POST',
-			url : appurl+'/App/Index/getorders',
-			data : {
-				uid : $_GET['uid']
-			},
-			success : function (response , status , xhr){
-				if(response){
-					var json = eval(response); 
-					var html = '';
-					var order_status = '';
-					
-					$.each(json, function (index, value) {
-						var pay = '';
-						var order = '';
-						if (value.order_status == '0'){
-							order_status = 'no';
-							order = '未发货';
-						}else if ( value.order_status == '1'){
-							order_status = 'no';
-							var confirm_url = appurl+'/App/Index/confirm_order?id='+value.orderid+'&uid='+$_GET['uid'];
-							order = '<a href="'+confirm_url+'" style="color:red">确认收货</a>';
-						}else if ( value.order_status == '4'){
-							order_status = 'no';
-							order = '已退货';
-						}else{
-							order_status = 'ok';
-							order = '已完成';
-						}
-						
-						if (value.pay_status == '0'){
-							pay_status = 'no';
-							pay = '<a href="'+value.pay_url+'">去支付</a>';
-						}else if ( value.pay_status == '1'){
-							pay_status = 'ok';
-							pay = '已支付';
-						}
-						//html += '<tr><td>'+value.orderid+'</td><td class="cc">'+value.totalprice+'元</td><td class="cc"><em class="'+pay_status+'">'+pay+'</em></td><td class="cc"><em class="'+order_status+'">'+order+'</em></td></tr>';
-					
-						html += '<li style="border: 1px solid #d0d0d0;border-radius: 10px;margin-bottom:10px;background-color:#FFF;"><table><tr><td style="border-bottom:0px">订单编号:'+value.orderid+'</td></tr>';
-						html += '<td style="border-bottom:0px">订单金额:'+value.totalprice+'元</td></tr>';
-						html += '<td style="border-bottom:0px">订单时间:'+value.time+'</td></tr>';
-						html += '<td style="border-bottom:0px">支付状态:<em class="'+pay_status+'">'+pay+'</em>';
-						if (value.pay_status == '0')
-						{
-							html += '<a href="'+value.pay_url+'">(已经支付?)</a>';
-						}
-						html += '</td></tr>';
-						if(value.order_status == '1')
-						{
-							html += '<td style="border-bottom:0px">订单状态:<em class="'+order_status+'" style="background-color:#FFFF00;">'+order+'</em></td></tr>';
-						}
-						else
-						{
-							html += '<td style="border-bottom:0px">订单状态:<em class="'+order_status+'">'+order+'</em></td></tr>';
-						}
-						html += '<td style="border-bottom:0px">快递公司:'+value.order_info_name+'</em></td></tr>';
-						html += '<td style="border-bottom:0px">快递单号:'+value.order_info_num+'</em></td></tr>';
-						html += '</table></li>';
-					});
-					
-					$('#orderlistinsert').empty();
-					$('#orderlistinsert').append( html );					
-				}
-
-			},
-			beforeSend : function(){
-    			$('#page_tag_load').show();
-	    	},
-	    	complete : function(){
-	    		$('#page_tag_load').hide();
-	    	}
-		});
+        window.location.href = '/index.php?r=member/order';
 	});
 });
 
