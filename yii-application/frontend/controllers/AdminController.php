@@ -108,5 +108,23 @@ class AdminController extends Controller
         }
     }
 
+    public function actionUserView(){
+        $page = Yii::$app->request->get('page');
+        $limit = Yii::$app->request->get('limit') ? Yii::$app->request->get('limit') : self::DEFAULT_SIZE;
+        $offset = ($page - 1) * $limit;
+
+        $userQuery = (new Query())->from('user')
+            ->select('user.*,pu.name as parent_name')
+            ->leftJoin('user pu','pu.id = user.p_id')
+            ->orderBy('created_time desc');
+        $pages = new Pagination(['totalCount' => $userQuery->count(), 'pageSize' => self::DEFAULT_SIZE]);
+        $userList = $userQuery->offset($offset)->limit($limit)->all();
+
+        foreach ($userList as &$user) {
+            $order['created_time'] = date('Y-m-d H:i:s', $user['created_time']);
+        }
+        return $this->render('user_list', ['userList' => $userList, 'pages' => $pages]);
+    }
+
 
 }
