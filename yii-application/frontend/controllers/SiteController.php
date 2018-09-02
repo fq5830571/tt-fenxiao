@@ -94,7 +94,8 @@ class SiteController extends Controller
         $payCount = (new Query())->from('order')->where(['user_id' => $id, 'status' => 0])->count();
         $notPayCount = (new Query())->from('order')->where(['user_id' => $id, 'status' => 1])->count();
         $link = $_SERVER['HTTP_HOST'] . '/index.php?r=site/register&id=' . $id;
-        return $this->render('index', ['user' => $user, 'parentName' => $parentName, 'totalCount' => $totalCount, 'levelCount' => $levelCount, 'payCount' => $payCount, 'notPayCount' => $notPayCount, 'link' => $link]);
+        $message = (new Query())->from('message')->where(['status' => 1])->one();
+        return $this->render('index', ['user' => $user, 'parentName' => $parentName, 'totalCount' => $totalCount, 'levelCount' => $levelCount, 'payCount' => $payCount, 'notPayCount' => $notPayCount, 'link' => $link,'message'=>$message]);
     }
 
     public function actionGoodsListView()
@@ -128,7 +129,7 @@ class SiteController extends Controller
             if (empty($userId)) {
                 throw new \Exception("请先登录");
             }
-            if (empty(intval($num))) {
+            if (empty($num)) {
                 throw new \Exception("请选择数量");
             }
             $user = (new Query())->from('user')->where(['id' => $userId])->one();

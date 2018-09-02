@@ -35,5 +35,16 @@ class User extends ActiveRecord
         return '{{%user}}';
     }
 
+    public static function getLevel($level){
+        $levelList = [
+            1=>'一级',
+            2=>'二级',
+            3=>'三级',
+            4=>'四级',
+            5=>'五级',
+        ];
+        return $levelList[$level]?$levelList[$level]:'未知等级';
+    }
+
 
 }

@@ -88,7 +88,7 @@ layui.use(['form', 'jquery', 'laydate', 'layer', 'laypage', 'dialog',   'element
 		var id = That.attr('data-id');
 		var url=That.attr('data-url');
 		//将iframeObj传递给父级窗口
-		parent.page("菜单编辑", url + "?id=" + id, iframeObj, w = "700px", h = "620px");
+		parent.page("修改", url, iframeObj, w = "300px", h = "420px");
 		return false;
 	})
 });
@@ -147,4 +147,11 @@ function refresh() {
 	}
 
 	layer.closeAll();
+}
+
+function refresh1() {
+    //根据传递的name值，获取子iframe窗口，执行刷新
+    window.parent.location.reload();
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.close(index);
 }

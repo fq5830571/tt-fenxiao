@@ -12,7 +12,7 @@ $this->title = '用户管理';
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>用户管理</title>
+    <title>信息管理</title>
     <link rel="stylesheet" type="text/css" href="../../static/admin/layui/css/layui.css" />
     <link rel="stylesheet" type="text/css" href="../../static/admin/css/admin.css" />
 </head>
@@ -41,6 +41,7 @@ $this->title = '用户管理';
             <button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
         </div>
     </form>-->
+    <button class="layui-btn layui-btn-small layui-btn-normal addBtn1 hidden-xs" data-url=""><i class="layui-icon"></i></button>
     <div class="layui-form" id="table-list">
         <table class="layui-table" lay-even lay-skin="nob">
             <colgroup>
@@ -48,37 +49,23 @@ $this->title = '用户管理';
                 <col width="100">
                 <col  width="100">
                 <col  width="100">
-                <col width="100">
-                <col width="150">
             </colgroup>
             <thead>
             <tr>
                 <!--<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>-->
-                <th >用户id</th>
-                <th >用户名</th>
-                <th >上级</th>
-                <th >等级</th>
-                <th >余额</th>
-                <th >电话</th>
-                <th>创建时间</th>
-                <th>设置会员等级</th>
+                <th >id</th>
+                <th >信息内容</th>
+                <th >状态</th>
+                <th >操作</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($userList as $user){?>
+            <?php foreach ($messageList as $message){?>
             <tr>
-                <td class="hidden-xs"><?=$user['id']?></td>
-                <td class="hidden-xs"><?=$user['name']?></td>
-                <td class="hidden-xs"><?=$user['parent_name']?></td>
-                <td class="hidden-xs"><?=$user['level_name']?></td>
-                <td class="hidden-xs"><?=$user['balance']?></td>
-                <td class="hidden-xs"><?=$user['phone']?></td>
-                <td><?=date('Y-m-d H:i:s',$user['created_time'])?></td>
-                <th>
-                    <div class="layui-inline">
-                        <button class="layui-btn layui-btn-mini layui-btn-normal  edit-btn1" data-id="1" data-url="/index.php?r=admin/set-level&id=<?=$user['id']?>"><i class="layui-icon"></i></button>
-                    </div>
-                </th>
+                <td class="hidden-xs"><?=$message['id']?></td>
+                <td class="hidden-xs"><?=$message['content']?></td>
+                <td class="hidden-xs"><button  data-id="<?=$message['id']?>" class="layui-btn layui-btn-mini table-list-status layui-btn-normal status" data-status="<?=$message['status']?>"><?=$message['status'] == 0 ?'不显示':'显示'?></button></td>
+                <td class="hidden-xs"><button class="layui-btn layui-btn-mini layui-btn-normal  edit-btn1" data-id="1" data-url="menu-add2.html"><i class="layui-icon"></i></button></td>
             </tr>
             <?php }?>
             </tbody>
@@ -95,25 +82,22 @@ $this->title = '用户管理';
         var $ = layui.jquery;
         var dialog = layui.dialog;
         //顶部批量删除
-        $('.pay').click(function() {
-            var id=$(this).attr('data-id');
-            var taht = $(this);
+        $('.status').click(function() {
+            var id = $(this).attr('data-id');;
+            var status=$(this).attr('data-status');
+            var message =  status==0?'您确定要推送吗？':"您确定要关闭推送吗";
             dialog.confirm({
-                message:'您确定要标记已支付吗？',
+                message:message,
                 success:function(){
                     $.ajax({
                         type: 'post',
-                        url: '/index.php?r=admin/pay-order',
-                        data: {id:id},
+                        url: '/index.php?r=admin/edit-message',
+                        data: {id:id,status:status},
                         dataType: 'json',
                         success: function (data) {
                             layer.msg(data.msg);
                             if (data.code == 200) {
-                                //改变状态
-                                taht.parents('tr').find('.order_status').addClass('red')
-                                taht.parents('tr').find('.order_status').html('已支付')
-                                taht.parents('tr').find('.pay').html('已支付')
-                                taht.parents('tr').find('.pay').removeClass('layui-btn-danger')
+                               location.reload()
                             }
                         }
                     });
@@ -125,11 +109,19 @@ $this->title = '用户管理';
             return false;
 
         })
-        $(".edit-btn1").click(function(){
+        $(".addBtn1").click(function(){
             var url = $(this).attr('data-url');
             layer.open({
                 type: 2,
-                content: [url], //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                content: '/index.php?r=admin/add-message', //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                area:["600px","300px"]
+            });
+        })
+        $(".edit-btn1").click(function(){
+            var id = $(this).attr('data-id');;
+            layer.open({
+                type: 2,
+                content: '/index.php?r=admin/add-message&id='+id, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
                 area:["600px","300px"]
             });
         })

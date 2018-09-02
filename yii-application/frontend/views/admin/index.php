@@ -47,6 +47,12 @@ $this->title = '后台首页';
                     <dd><a href="javascript:;" data-url="/index.php?r=admin/bonus-view" data-id='10' data-text="佣金管理"><span class="l-line"></span>佣金管理</a></dd>
                 </dl>
             </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont">&#xe608;</i>消息管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" data-url="/index.php?r=admin/message-view" data-id='11' data-text="消息管理"><span class="l-line"></span>消息管理</a></dd>
+                </dl>
+            </li>
             <!--<li class="layui-nav-item">
                 <a href="javascript:;"><i class="iconfont">&#xe604;</i>推荐位管理</a>
             </li>

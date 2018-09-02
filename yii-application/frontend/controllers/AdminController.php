@@ -3,7 +3,9 @@
 namespace frontend\controllers;
 
 use common\models\BonusRecord;
+use common\models\Message;
 use common\models\Order;
+use common\models\User;
 use yii;
 use yii\data\Pagination;
 use yii\db\Query;
@@ -122,8 +124,102 @@ class AdminController extends Controller
 
         foreach ($userList as &$user) {
             $order['created_time'] = date('Y-m-d H:i:s', $user['created_time']);
+            $user['level_name'] = User::getLevel($user['level']);
         }
         return $this->render('user_list', ['userList' => $userList, 'pages' => $pages]);
+    }
+
+    public function actionSetLevel(){
+        $id = Yii::$app->request->get('id');
+        $levelList = [
+            1=>'一级',
+            2=>'二级',
+            3=>'三级',
+            4=>'四级',
+            5=>'五级',
+        ];
+        if (Yii::$app->request->isAjax){
+            $id = Yii::$app->request->post('id');
+            $level = Yii::$app->request->post('level');
+            $result = User::updateAll(['level'=>$level],['id'=>$id]);
+            if(empty($result)){
+                $this->asJson(['success' => 1, 'code' => 500, 'msg' => '修改失败']);
+            }else{
+                $this->asJson(['success' => 1, 'code' => 200, 'msg' => '修改成功']);
+            }
+        }else{
+            return $this->render('set_level', ['levelList' => $levelList,'id'=>$id]);
+        }
+
+    }
+
+    public function actionMessageView(){
+        $page = Yii::$app->request->get('page');
+        $limit = Yii::$app->request->get('limit') ? Yii::$app->request->get('limit') : self::DEFAULT_SIZE;
+        $offset = ($page - 1) * $limit;
+
+        $messageQuery = (new Query())->from('message')
+            ->orderBy('created_time desc');
+        $pages = new Pagination(['totalCount' => $messageQuery->count(), 'pageSize' => self::DEFAULT_SIZE]);
+        $messageList = $messageQuery->offset($offset)->limit($limit)->all();
+
+        foreach ($messageList as &$message) {
+            $message['created_time'] = date('Y-m-d H:i:s', $message['created_time']);
+        }
+        return $this->render('message', ['messageList' => $messageList, 'pages' => $pages]);
+    }
+
+    public function actionAddMessage(){
+        if (Yii::$app->request->isAjax){
+            $content = Yii::$app->request->post('content');
+            $id = Yii::$app->request->post('id');
+
+            if(empty($content)){
+                $this->asJson(['success' => 1, 'code' => 500, 'msg' => '请填写消息内容']);
+            }
+            if(empty($id)){
+                $message = new Message();
+                $message->setAttributes(['content'=>$content,'created_time'=>time()],false);
+                $result = $message->save();
+            }else{
+                $result = Message::updateAll(['content'=>$content],['id'=>$id]);
+            }
+
+
+            if(empty($result)){
+                $this->asJson(['success' => 1, 'code' => 500, 'msg' => '失败']);
+            }else{
+                $this->asJson(['success' => 1, 'code' => 200, 'msg' => '成功']);
+            }
+        }else{
+            $id = Yii::$app->request->get('id');
+            $message = [];
+            if($id){
+                $message = (new Query())->from('message')->where(['id'=>$id])->one();
+            }
+            return $this->render('add_message',['message'=>$message]);
+        }
+
+    }
+
+    public function actionEditMessage(){
+        if (Yii::$app->request->isAjax){
+            $id = Yii::$app->request->post('id');
+            $status = Yii::$app->request->post('status');
+            $status = $status==0?1:0;
+            if($status == 1){
+                Message::updateAll(['status'=>0],'id >0');
+            }
+            $result = Message::updateAll(['status'=>$status],['id'=>$id]);
+            if(empty($result)){
+                $this->asJson(['success' => 1, 'code' => 500, 'msg' => '修改失败']);
+            }else{
+                $this->asJson(['success' => 1, 'code' => 200, 'msg' => '修改成功']);
+            }
+        }else{
+            return $this->render('add_message');
+        }
+
     }
 
 

@@ -77,7 +77,7 @@
         <span class="header_right">
 				<div class="header_l_di">
 					<span>昵称：<?=$user['name'] ?></span>&nbsp;&nbsp;
-					<<a style='color:red' href="<? ?>">账号设置</a>>
+					<<a style='color:red' href="/index.php?r=member/edit-member">账号设置</a>>
 				</div>
 				<div><span>合伙人：</span></div>
 				<div><span>注册时间：<?=date('Y-m-d',$user['created_time']) ?>&nbsp;&nbsp;
@@ -98,6 +98,9 @@
 
     <div class="cardexplain" style="TEXT-ALIGN: center;color:#000;font-size:14px;">您是由【<?=$parentName ?>】推荐</div>
     <div class="cardexplain" style="TEXT-ALIGN: center;color:#006400;font-size:13px;">
+        <?php if($message){?>
+        <marquee scrollamount="1" scrolldelay="7" direction="left"><?=$message['content']?></marquee>
+        <?php }?>
     </div>
     <div class="cardexplain">
         <div class="div_ul" id="all_cnt"><span><img style='margin-left:5px;'

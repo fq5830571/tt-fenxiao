@@ -116,6 +116,51 @@ class MemberController extends Controller
 
     }
 
+    public function actionEditMember(){
+        $id = Yii::$app->view->params['user_id'];
+        $user = (new Query())->from('user')->where(['id'=>$id])->one();
+        $model = new User();
+        if (Yii::$app->request->isPost){
+            try {
+                $nickname = Yii::$app->request->post('nickname');
+                if (empty($nickname)) {
+                    throw new \Exception("请输入修改的昵称");
+                }
+                $userModel = User::findOne($id);
+                $userModel->load( Yii::$app->request->post());
+                $rootPath = "/uploads/";
+                $file = yii\web\UploadedFile::getInstance($userModel,'image');
+                //调用模型中的属性  返回上传文件的名称
+                $name = $file->name;
+                //定义上传文件的二级目录
+                $path = date('Y-m-d',time());
+                //拼装上传文件的路径
+                $rootPath = $rootPath . $path . "/".time()."/";
+                if (!file_exists($rootPath)) {
+                    mkdir($_SERVER['DOCUMENT_ROOT'].$rootPath,true,true);
+                    chmod($_SERVER['DOCUMENT_ROOT'].$rootPath,0777);
+                }
+                //调用模型类中的方法 保存图片到该路径
+                $file->saveAs($_SERVER['DOCUMENT_ROOT'].$rootPath . $name);
+                //为模型中的logo属性赋值
+                $userModel->image = $rootPath . $name;
+                $userModel->name = $nickname;
+
+                $result = $userModel->save();
+                if(empty($result)){
+                    throw new \Exception("修改失败");
+                }
+                $this->redirect('/index.php?r=site/index');
+                //登录
+            } catch (\Exception $e) {
+                return $this->render('edit_member',['user'=>$user,'msg'=>$e->getMessage(),'model'=>$model]);
+            }
+        }else{
+            return $this->render('edit_member',['user'=>$user,'model'=>$model]);
+        }
+
+    }
+
     public function actionOrder(){
         $id = Yii::$app->view->params['user_id'];
         $orderList = (new Query())->from('order')->where(['user_id'=>$id])->all();
@@ -140,6 +185,8 @@ class MemberController extends Controller
         }
         return $this->render('order_list', ['orderList' => $orderList, 'pages' => $pages]);
     }
+
+
 
 
 

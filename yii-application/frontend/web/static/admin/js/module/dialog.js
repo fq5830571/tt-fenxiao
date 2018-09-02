@@ -36,7 +36,7 @@ layui.define(['jquery', 'layer'], function (exports) {
                     area: [w, h],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: url
+                    content: url,
                 });
             },
             /**
