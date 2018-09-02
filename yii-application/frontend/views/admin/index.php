@@ -33,6 +33,7 @@ $this->title = '后台首页';
                 <a href="javascript:;"><i class="iconfont">&#xe608;</i>用户管理</a>
                 <dl class="layui-nav-child">
                     <dd><a href="javascript:;" data-url="/index.php?r=admin/user-view" data-id='8' data-text="用户管理"><span class="l-line"></span>用户管理</a></dd>
+                    <dd><a href="javascript:;" data-url="/index.php?r=admin/user-chart" data-id='12' data-text="用户关系图"><span class="l-line"></span>用户关系图</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item">

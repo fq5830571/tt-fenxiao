@@ -222,5 +222,9 @@ class AdminController extends Controller
 
     }
 
+    public function actionUserChart(){
+        return $this->render('user_chart');
+    }
+
 
 }
