@@ -21,14 +21,15 @@ class AdminController extends Controller
     {
         return $this->render('index');
     }
+
     public function actionHome()
     {
-        $todayEndTime  = strtotime(date('Ymd 23:59:59',time()));
+        $todayEndTime = strtotime(date('Ymd 23:59:59', time()));
         $todayStartTime = $todayEndTime - 86400;
-        $userCount = (new Query())->from('user')->where('created_time >='.$todayStartTime)->andWhere('created_time <='.$todayEndTime)->count();
-        $currentOrderCount = (new Query())->from('order')->where('created_time >='.$todayStartTime)->andWhere('created_time <='.$todayEndTime)->count();
-        $currentBonusAmount = (new Query())->from('bonus_record')->where('created_time >='.$todayStartTime)->andWhere('created_time <='.$todayEndTime)->sum('bonus_amount');
-        return $this->render('home',['userCount'=>$userCount,'currentOrderCount'=>$currentOrderCount,'currentBonusAmount'=>$currentBonusAmount]);
+        $userCount = (new Query())->from('user')->where('created_time >=' . $todayStartTime)->andWhere('created_time <=' . $todayEndTime)->count();
+        $currentOrderCount = (new Query())->from('order')->where('created_time >=' . $todayStartTime)->andWhere('created_time <=' . $todayEndTime)->count();
+        $currentBonusAmount = (new Query())->from('bonus_record')->where('created_time >=' . $todayStartTime)->andWhere('created_time <=' . $todayEndTime)->sum('bonus_amount');
+        return $this->render('home', ['userCount' => $userCount, 'currentOrderCount' => $currentOrderCount, 'currentBonusAmount' => $currentBonusAmount]);
     }
 
     public function actionOrderView()
@@ -110,14 +111,15 @@ class AdminController extends Controller
         }
     }
 
-    public function actionUserView(){
+    public function actionUserView()
+    {
         $page = Yii::$app->request->get('page');
         $limit = Yii::$app->request->get('limit') ? Yii::$app->request->get('limit') : self::DEFAULT_SIZE;
         $offset = ($page - 1) * $limit;
 
         $userQuery = (new Query())->from('user')
             ->select('user.*,pu.name as parent_name')
-            ->leftJoin('user pu','pu.id = user.p_id')
+            ->leftJoin('user pu', 'pu.id = user.p_id')
             ->orderBy('created_time desc');
         $pages = new Pagination(['totalCount' => $userQuery->count(), 'pageSize' => self::DEFAULT_SIZE]);
         $userList = $userQuery->offset($offset)->limit($limit)->all();
@@ -129,31 +131,33 @@ class AdminController extends Controller
         return $this->render('user_list', ['userList' => $userList, 'pages' => $pages]);
     }
 
-    public function actionSetLevel(){
+    public function actionSetLevel()
+    {
         $id = Yii::$app->request->get('id');
         $levelList = [
-            1=>'一级',
-            2=>'二级',
-            3=>'三级',
-            4=>'四级',
-            5=>'五级',
+            1 => '一级',
+            2 => '二级',
+            3 => '三级',
+            4 => '四级',
+            5 => '五级',
         ];
-        if (Yii::$app->request->isAjax){
+        if (Yii::$app->request->isAjax) {
             $id = Yii::$app->request->post('id');
             $level = Yii::$app->request->post('level');
-            $result = User::updateAll(['level'=>$level],['id'=>$id]);
-            if(empty($result)){
+            $result = User::updateAll(['level' => $level], ['id' => $id]);
+            if (empty($result)) {
                 $this->asJson(['success' => 1, 'code' => 500, 'msg' => '修改失败']);
-            }else{
+            } else {
                 $this->asJson(['success' => 1, 'code' => 200, 'msg' => '修改成功']);
             }
-        }else{
-            return $this->render('set_level', ['levelList' => $levelList,'id'=>$id]);
+        } else {
+            return $this->render('set_level', ['levelList' => $levelList, 'id' => $id]);
         }
 
     }
 
-    public function actionMessageView(){
+    public function actionMessageView()
+    {
         $page = Yii::$app->request->get('page');
         $limit = Yii::$app->request->get('limit') ? Yii::$app->request->get('limit') : self::DEFAULT_SIZE;
         $offset = ($page - 1) * $limit;
@@ -169,61 +173,104 @@ class AdminController extends Controller
         return $this->render('message', ['messageList' => $messageList, 'pages' => $pages]);
     }
 
-    public function actionAddMessage(){
-        if (Yii::$app->request->isAjax){
+    public function actionAddMessage()
+    {
+        if (Yii::$app->request->isAjax) {
             $content = Yii::$app->request->post('content');
             $id = Yii::$app->request->post('id');
 
-            if(empty($content)){
+            if (empty($content)) {
                 $this->asJson(['success' => 1, 'code' => 500, 'msg' => '请填写消息内容']);
             }
-            if(empty($id)){
+            if (empty($id)) {
                 $message = new Message();
-                $message->setAttributes(['content'=>$content,'created_time'=>time()],false);
+                $message->setAttributes(['content' => $content, 'created_time' => time()], false);
                 $result = $message->save();
-            }else{
-                $result = Message::updateAll(['content'=>$content],['id'=>$id]);
+            } else {
+                $result = Message::updateAll(['content' => $content], ['id' => $id]);
             }
 
 
-            if(empty($result)){
+            if (empty($result)) {
                 $this->asJson(['success' => 1, 'code' => 500, 'msg' => '失败']);
-            }else{
+            } else {
                 $this->asJson(['success' => 1, 'code' => 200, 'msg' => '成功']);
             }
-        }else{
+        } else {
             $id = Yii::$app->request->get('id');
             $message = [];
-            if($id){
-                $message = (new Query())->from('message')->where(['id'=>$id])->one();
+            if ($id) {
+                $message = (new Query())->from('message')->where(['id' => $id])->one();
             }
-            return $this->render('add_message',['message'=>$message]);
+            return $this->render('add_message', ['message' => $message]);
         }
 
     }
 
-    public function actionEditMessage(){
-        if (Yii::$app->request->isAjax){
+    public function actionEditMessage()
+    {
+        if (Yii::$app->request->isAjax) {
             $id = Yii::$app->request->post('id');
             $status = Yii::$app->request->post('status');
-            $status = $status==0?1:0;
-            if($status == 1){
-                Message::updateAll(['status'=>0],'id >0');
+            $status = $status == 0 ? 1 : 0;
+            if ($status == 1) {
+                Message::updateAll(['status' => 0], 'id >0');
             }
-            $result = Message::updateAll(['status'=>$status],['id'=>$id]);
-            if(empty($result)){
+            $result = Message::updateAll(['status' => $status], ['id' => $id]);
+            if (empty($result)) {
                 $this->asJson(['success' => 1, 'code' => 500, 'msg' => '修改失败']);
-            }else{
+            } else {
                 $this->asJson(['success' => 1, 'code' => 200, 'msg' => '修改成功']);
             }
-        }else{
+        } else {
             return $this->render('add_message');
         }
 
     }
 
     public function actionUserChart(){
-        return $this->render('user_chart');
+        /*$data = [
+            'name'=>'总裁',
+            'title'=>'',
+        ];
+        $user_1List = (new Query())->from('user')->where(['p_id'=>0])->all();
+        $user1 = [];
+        foreach ($user_1List as $key=>$user){
+            $user1[$key]['name'] =  $user['name'];
+            $user1[$key]['title'] =  $user['phone'];
+            $user_2List = (new Query())->from('user')->where(['p_id'=>$user['id']])->all();
+            foreach ($user_2List as $k2=>$user2){
+                $user1[$key]['children'][$k2]['name'] = $user2['name'];
+                $user1[$key]['children'][$k2]['title'] = $user2['phone'];
+            }
+        }
+        $data['children'] = $user1;
+        echo json_encode($data);die;
+        $this->asJson($data);*/
+        if (Yii::$app->request->isAjax) {
+            {
+                $data = [
+                    'name'=>'总裁',
+                    'title'=>'',
+                ];
+                $user_1List = (new Query())->from('user')->where(['p_id'=>0])->all();
+                $user1 = [];
+                foreach ($user_1List as $key=>$user){
+                    $user1[$key]['name'] =  $user['name'];
+                    $user1[$key]['title'] =  $user['phone'];
+                    $user_2List = (new Query())->from('user')->where(['p_id'=>$user['id']])->all();
+                    foreach ($user_2List as $k2=>$user2){
+                        $user1[$key]['children'][$k2]['name'] = $user2['name'];
+                        $user1[$key]['children'][$k2]['title'] = $user2['phone'];
+                    }
+                }
+                $data['children'] = $user1;
+                
+                $this->asJson($data);
+            }
+        } else {
+            return $this->render('user_chart');
+        }
     }
 
 

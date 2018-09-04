@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/orgchart/examples/css/font-awesome.min.css">
     <link rel="stylesheet" href="/orgchart/examples/css/jquery.orgchart.css">
     <link rel="stylesheet" href="/orgchart/examples/color-coded/style.css">
-    <link rel="stylesheet" href="/orgchart/examples/examples/color-coded/style.css">
 
 </head>
 <body>

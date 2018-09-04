@@ -35,7 +35,7 @@
     });
 
     $('#chart-container').orgchart({
-      'data' : '/orgchart/initdata',
+        'data' : '/index.php?r=admin/user-chart',
       'depth': 2,
       'nodeContent': 'title'
     });
