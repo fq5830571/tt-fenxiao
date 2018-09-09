@@ -41,7 +41,7 @@
 </head>
 <body>
 <header>
-    <p class="button_img" style="line-height: 3em; color:#fff;width:100%;text-align:center; margin:0 auto;">立即关注，组建<!--?php echo (名族品牌); ?-->家族</p>
+    <p class="button_img" style="line-height: 3em; color:#fff;width:100%;text-align:center; margin:0 auto;"><?=$puser?'您由【'.$puser['name'].'】推荐':'立即关注，组建社区'?></p>
 </header>
 <div class="login-reg mc radius">
     <form onSubmit="javascript:return check(formUser);" action="/index.php?r=member/register" method="post" name="formUser">

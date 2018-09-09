@@ -47,6 +47,17 @@
                     <li>
                         <table style="padding: 0; margin: 0; width: 100%;">
                             <tbody>
+                            <?php if($user['p_id'] == 0){?>
+                                <tr>
+                                    <td width="80px"><label for="price" class="ui-input-text">设置社区：</label></td>
+                                    <td>
+                                        <div class="ui-input-text">
+                                            <input name="shequ_name" placeholder="" value="<?=$user['shequ_name']?>" type="text"
+                                                   class="ui-input-text">
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php }?>
                             <tr>
                                 <td width="80px"><label for="price" class="ui-input-text">设置昵称：</label></td>
                                 <td>
@@ -56,6 +67,16 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <td width="80px"><label for="price" class="ui-input-text">身份证号：</label></td>
+                                <td>
+                                    <div class="ui-input-text">
+                                        <input name="card" placeholder="" value="<?=$user['card']?>" type="text"
+                                               class="ui-input-text">
+                                    </div>
+                                </td>
+                            </tr>
+
                             <!--<tr>
                                 <td width="80px"><label for="bank_name" class="ui-input-text">密码：</label></td>
                                 <td>

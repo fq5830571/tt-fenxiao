@@ -79,9 +79,9 @@
 					<span>昵称：<?=$user['name'] ?></span>&nbsp;&nbsp;
 					<<a style='color:red' href="/index.php?r=member/edit-member">账号设置</a>>
 				</div>
-				<div><span>合伙人：</span></div>
+				<div><span>社区：</span><?=$user['shequ_name'] ?></div>
 				<div><span>注册时间：<?=date('Y-m-d',$user['created_time']) ?>&nbsp;&nbsp;
-                        <<a style='color:red' href="./index.php?r=admin/logout">退出登录</a>></span></div>
+                        <<a style='color:red' href="./index.php?r=member/logout">退出登录</a>></span></div>
 				<div><span> 会员ID：<?=$user['id'] ?>
 				   </span></div>
     </div>
