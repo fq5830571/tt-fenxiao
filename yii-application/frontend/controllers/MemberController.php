@@ -47,11 +47,15 @@ class MemberController extends Controller
         $pid = isset($_GET['p_id'])?$_GET['p_id']:0;
         if (Yii::$app->request->isPost){
             try {
+                $code = isset($_GET['code'])?$_GET['code']:0;
                 $username = Yii::$app->request->post('username');
                 $password = Yii::$app->request->post('password');
                 $phone = Yii::$app->request->post('phone');
                 if (empty($username) || empty($password) || empty($phone)) {
                     throw new \Exception("请填写完整");
+                }
+                if(empty($pid) && $code!='AUTH'){
+                    throw new \Exception("请通过合法地址进行注册");
                 }
                 $user = (new Query())->from('user')->where(['username'=>$username])->one();
                 if($user){
