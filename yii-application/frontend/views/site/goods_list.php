@@ -135,7 +135,9 @@
     .button_buy a p {
         height: 3em;
         overflow: hidden;
-    }
+    }.i_txt,.i_pri_wrap{
+		text-align: center;
+	}
 </style>
 <div class="footermenu">
     <ul>

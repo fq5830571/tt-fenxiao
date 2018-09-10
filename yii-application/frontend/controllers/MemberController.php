@@ -45,18 +45,27 @@ class MemberController extends Controller
 
     public function actionRegister()
     {
+        $pid = isset($_GET['p_id'])?$_GET['p_id']:0;
         if (Yii::$app->request->isPost){
             try {
+                $code = isset($_GET['code'])?$_GET['code']:0;
                 $username = Yii::$app->request->post('username');
                 $password = Yii::$app->request->post('password');
                 $phone = Yii::$app->request->post('phone');
-                $pid = isset($_GET['p_id'])?$_GET['p_id']:0;
                 if (empty($username) || empty($password) || empty($phone)) {
                     throw new \Exception("请填写完整");
+                }
+                if(empty($pid) && $code!='AUTH'){
+                    throw new \Exception("请通过合法地址进行注册");
                 }
                 $user = (new Query())->from('user')->where(['username'=>$username])->one();
                 if($user){
                     throw new \Exception("该用户名已经被注册");
+                }
+                $shequ_name = '';
+                if($pid){
+                    $puser = (new Query())->from('user')->where(['id'=>$user['p_id']])->one();
+                    $shequ_name = $puser['shequ_name'];
                 }
                 $user = new User();
                 $userData = [
@@ -64,7 +73,8 @@ class MemberController extends Controller
                      'password'=>md5($password),
                      'phone'=>$phone,
                      'created_time'=>time(),
-                     'p_id'=>intval($pid)
+                     'p_id'=>intval($pid),
+                     'shequ_name'=>$shequ_name,
                 ];
                 $user->setAttributes($userData,false);
                 $result = $user->save();
@@ -79,7 +89,9 @@ class MemberController extends Controller
             }
 
         }else{
-            return $this->render('register');
+
+            $puser = (new Query())->from('user')->where(['id'=>$pid])->one();
+            return $this->render('register',['puser'=>$puser]);
         }
     }
 
@@ -124,29 +136,37 @@ class MemberController extends Controller
         if (Yii::$app->request->isPost){
             try {
                 $nickname = Yii::$app->request->post('nickname');
+                $card = Yii::$app->request->post('card');
+                $shequ_name = Yii::$app->request->post('shequ_name');
                 if (empty($nickname)) {
                     throw new \Exception("请输入修改的昵称");
                 }
                 $userModel = User::findOne($id);
                 $userModel->load( Yii::$app->request->post());
                 $rootPath = "/uploads/";
-                $file = yii\web\UploadedFile::getInstance($userModel,'image');
-                //调用模型中的属性  返回上传文件的名称
-                $name = $file->name;
-                //定义上传文件的二级目录
-                $path = date('Y-m-d',time());
-                //拼装上传文件的路径
-                $rootPath = $rootPath . $path . "/".time()."/";
-                if (!file_exists($rootPath)) {
-                    mkdir($_SERVER['DOCUMENT_ROOT'].$rootPath,true,true);
-                    chmod($_SERVER['DOCUMENT_ROOT'].$rootPath,0777);
-                }
-                //调用模型类中的方法 保存图片到该路径
-                $file->saveAs($_SERVER['DOCUMENT_ROOT'].$rootPath . $name);
-                //为模型中的logo属性赋值
-                $userModel->image = $rootPath . $name;
-                $userModel->name = $nickname;
 
+                $file = yii\web\UploadedFile::getInstance($userModel,'image');
+                if($file){
+                    //调用模型中的属性  返回上传文件的名称
+                    $name = $file->name;
+                    //定义上传文件的二级目录
+                    $path = date('Y-m-d',time());
+                    //拼装上传文件的路径
+                    $rootPath = $rootPath . $path . "/".time()."/";
+                    if (!file_exists($rootPath)) {
+                        mkdir($_SERVER['DOCUMENT_ROOT'].$rootPath,true,true);
+                        chmod($_SERVER['DOCUMENT_ROOT'].$rootPath,0777);
+                    }
+                    //调用模型类中的方法 保存图片到该路径
+                    $file->saveAs($_SERVER['DOCUMENT_ROOT'].$rootPath . $name);
+                    //为模型中的logo属性赋值
+                    $userModel->image = $rootPath . $name;
+                }
+
+
+                $userModel->name = $nickname;
+                $userModel->card = $card;
+                $userModel->shequ_name = $shequ_name;
                 $result = $userModel->save();
                 if(empty($result)){
                     throw new \Exception("修改失败");
