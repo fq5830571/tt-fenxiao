@@ -46,6 +46,7 @@ $this->title = '订单管理';
             <colgroup>
                 <col width="100">
                 <col width="100">
+                <col width="100">
                 <col  width="100">
                 <col  width="100">
                 <col  width="100">
@@ -56,6 +57,7 @@ $this->title = '订单管理';
             <tr>
                 <!--<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>-->
                 <th >订单编号</th>
+                <th >小区</th>
                 <th >付款人</th>
                 <th >支付金额</th>
                 <th >是否上传凭证</th>
@@ -68,7 +70,8 @@ $this->title = '订单管理';
             <?php foreach ($orderList as $order){?>
             <tr>
                 <td class="hidden-xs"><?=$order['order_sn']?></td>
-                <td class="hidden-xs"><?=$order['name']?></td>
+                <td class="hidden-xs"><?=$order['shequ_name']?></td>
+                <td class="hidden-xs"><?=$order['username']?></td>
                 <td class="hidden-xs"><?=$order['amount']?></td>
                 <td class="hidden-xs">
                     <?php if($order['content']){?>

@@ -39,7 +39,7 @@ class AdminController extends Controller
         $offset = ($page - 1) * $limit;
 
         $orderQuery = (new Query())->from('order')
-            ->select('order.*,user.name,proof.image,proof.content')
+            ->select('order.*,user.name,proof.image,proof.content,user.username,user.shequ_name')
             ->leftJoin('user', 'user.id = order.user_id')
             ->leftJoin('proof', 'proof.order_id = order.id')
             ->orderBy('created_time desc');

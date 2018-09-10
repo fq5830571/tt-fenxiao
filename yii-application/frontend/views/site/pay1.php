@@ -97,25 +97,20 @@
             <ul id="ullist">
                 <dt style="display:none;">已选购的</dt>
                 <li class="ccbg2" id="wemall_1">
-                    <div class="orderdish"><span name="title">申请订单</span><span class="price"
-                                                                                                      id="v_0"
-                                                                                                      style="display:none;"><?= $goods['money'] ?></span><span
-                                style="display:none; class=" price"="">元</span></div>
-                    <div class="orderchange"><a href='javascript:addProductN("wemall_1_<?= $goods['money'] ?>")' class="increase"><b
-                                    class="ico_increase">加一份</b></a><span class="count" id="num_1_499">1</span><a
-                                href='javascript:reduceProductN("wemall_1_<?= $goods['money'] ?>")' class="reduce"><b class="ico_reduce">减一份</b></a>
+                    <div class="orderdish"><span name="title">申请购买</span>
+                        <span class="price" id="v_0" style="display:none;">
+
+                        </span>
+                        <span style="display:none; class=" price"="">元</span></div>
+                    <div class="orderchange">
                     </div>
                 </li>
             </ul>
 
             <ul>
-                <li class="ccbg2" id="emptyLii">价格￥<span><?= $goods['money'] ?></span>元</li>
+                <li class="ccbg2" id="emptyLii">价格￥<span> <input name="shequ_name" type="text" id="total_price" class="common-input" placeholder="请输入价格" style="width:90%;"></span>元</li>
             </ul>
-            <ul id="cartinfo">
-                <dt>购物车总计</dt>
-                <li class="ccbg2" id="emptyLii">已选：<span id="totalNum">1</span>份　共计：￥<span id="totalPrice"><?= $goods['money'] ?></span>元</li>
-                <li style="display:none"><span id="totalLirun">0.00</span></li>
-            </ul>
+
             <div class="twobtn">
                 <div class="footerbtn">
                     <a class="del right3" href="./index.php?r=site/index">返回首页</a>
@@ -202,7 +197,7 @@
             $.ajax({
                 type: 'post',
                 url: '/index.php?r=site/pay',
-                data: {goods_id:id,num:num},
+                data: {total_price:$("#total_price").val()},
                 dataType: 'json',
                 success: function (data) {
                     alert(data.msg);
