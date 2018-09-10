@@ -38,6 +38,7 @@ $this->title = '订单管理';
         <table class="layui-table" lay-even lay-skin="nob">
             <colgroup>
                 <col width="100">
+                <col width="100">
                 <col width="200">
                 <col width="200">
                 <col  width="100">
@@ -46,7 +47,8 @@ $this->title = '订单管理';
             <thead>
             <tr>
                 <!--<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>-->
-                <th >姓名</th>
+                <th >昵称</th>
+                <th >用户名</th>
                 <th >获得佣金金额</th>
                 <th >关联订单编号</th>
                 <th >账户余额</th>
@@ -57,6 +59,7 @@ $this->title = '订单管理';
             <?php foreach ($bonusList as $bonus){?>
             <tr>
                 <td class="hidden-xs"><?=$bonus['name']?></td>
+                <td class="hidden-xs"><?=$bonus['username']?></td>
                 <td class="hidden-xs" style="color: forestgreen;">+<?=$bonus['bonus_amount']?></td>
                 <td class="hidden-xs"><?=$bonus['order_sn']?></td>
                 <td class="hidden-xs"><?=$bonus['balance']?></td>
