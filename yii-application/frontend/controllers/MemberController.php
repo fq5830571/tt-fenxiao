@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\BonusRecord;
 use common\models\Order;
+use common\models\Proof;
 use common\models\User;
 use yii;
 use yii\data\Pagination;
@@ -184,6 +185,34 @@ class MemberController extends Controller
             $order['created_time'] = date('Y-m-d H:i:s', $order['created_time']);
         }
         return $this->render('order_list', ['orderList' => $orderList, 'pages' => $pages]);
+    }
+
+    public function actionUpload(){
+        if(Yii::$app->request->isPost){
+            try {
+                $image = Yii::$app->request->post('image');
+                $content = Yii::$app->request->post('content');
+                $orderId = Yii::$app->request->post('order_id');
+                if (empty($image)) {
+                    throw new \Exception("请上传凭证");
+                }
+                $result = (new Query())->from('proof')->where(['order_id'=>$orderId])->one();
+                if($result){
+                    throw new \Exception("您已经上传过凭证");
+                }
+                $proof = new Proof();
+                $proof->setAttributes(['image'=>$image,'content'=>$content,'order_id'=>$orderId],false);
+                $proof->save();
+                $this->asJson(['status'=>1,'msg'=>'上传成功']);
+                //登录
+            } catch (\Exception $e) {
+                $this->asJson(['status'=>0,'msg'=>$e->getMessage()]);
+            }
+        }else{
+            $order_id = Yii::$app->request->get('id');
+            return $this->render('upload',['order_id'=>$order_id]);
+        }
+
     }
 
 

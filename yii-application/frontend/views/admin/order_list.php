@@ -48,6 +48,7 @@ $this->title = '订单管理';
                 <col width="100">
                 <col  width="100">
                 <col  width="100">
+                <col  width="100">
                 <col width="100">
                 <col width="150">
             </colgroup>
@@ -57,6 +58,7 @@ $this->title = '订单管理';
                 <th >订单编号</th>
                 <th >付款人</th>
                 <th >支付金额</th>
+                <th >是否上传凭证</th>
                 <th>支付状态</th>
                 <th>支付时间</th>
                 <th>操作</th>
@@ -68,6 +70,13 @@ $this->title = '订单管理';
                 <td class="hidden-xs"><?=$order['order_sn']?></td>
                 <td class="hidden-xs"><?=$order['name']?></td>
                 <td class="hidden-xs"><?=$order['amount']?></td>
+                <td class="hidden-xs">
+                    <?php if($order['content']){?>
+                        <button class="layui-btn layui-btn-mini check" data-id="<?=$order['id']?>" >查看凭证</button>
+                    <?php }else{?>
+                        未上传
+                    <?php }?>
+                </td>
                 <td class="order_status  <?=$order['status'] ==0?'blue':'red'?>"><?=$order['status'] ==0?'未支付':'已支付'?></td>
                 <td><?=$order['created_time']?></td>
                 <td>
@@ -90,6 +99,14 @@ $this->title = '订单管理';
     layui.use(['form', 'jquery', 'layer', 'dialog'], function() {
         var $ = layui.jquery;
         var dialog = layui.dialog;
+        $(".check").click(function(){
+            var id=$(this).attr('data-id');
+            layer.open({
+                type: 2,
+                content: '/index.php?r=admin/check-proof&id='+id, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                area:["800px","600px"]
+            });
+        })
         //顶部批量删除
         $('.pay').click(function() {
             var id=$(this).attr('data-id');

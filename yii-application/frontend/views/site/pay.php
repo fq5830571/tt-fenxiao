@@ -208,7 +208,7 @@
                     alert(data.msg);
                     setTimeout(function () {
                         if (data.code == 200) {
-                            location.reload()
+                            location.href = '/index.php?r=member/order';
                         }
                     },2000)
                 }

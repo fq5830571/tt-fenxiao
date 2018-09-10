@@ -4,10 +4,13 @@
     <title></title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="/Public/Static/css/foods.css?t=333" rel="stylesheet" type="text/css">
+
     <script type="text/javascript" src="/Public/Static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/Public/Static/js/wemall.js?14115"></script>
     <script type="text/javascript" src="/Public/Static/js/alert.js"></script>
+    <link href="/Public/Static/css/foods.css?t=333" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/layui-v2.2.5/layui/css/layui.css" />
+
     <style type="text/css">
 
         .window {
@@ -478,8 +481,10 @@
                     </tr>
                     <tr>
                         <td style="border-bottom:0px">支付状态:<em class="no"><a
-                                        href="javascript:void(0)"><?=$order['status'] == 1?'已支付':'未支付'?>去支付</a></em>
+                                        href="javascript:void(0)"><?=$order['status'] == 1?'已支付':'未支付'?></a></em>
+                            <span><a style="line-height: 38px;" href="/index.php?r=member/upload&id=<?=$order['id']?>" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe660;</i>上传凭证   </a></span>
                         </td>
+
                     </tr>
                     </tbody>
                 </table>

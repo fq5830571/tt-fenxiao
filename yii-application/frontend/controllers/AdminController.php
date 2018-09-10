@@ -39,8 +39,9 @@ class AdminController extends Controller
         $offset = ($page - 1) * $limit;
 
         $orderQuery = (new Query())->from('order')
-            ->select('order.*,user.name')
+            ->select('order.*,user.name,proof.image,proof.content')
             ->leftJoin('user', 'user.id = order.user_id')
+            ->leftJoin('proof', 'proof.order_id = order.id')
             ->orderBy('created_time desc');
         $pages = new Pagination(['totalCount' => $orderQuery->count(), 'pageSize' => self::DEFAULT_SIZE]);
         $orderList = $orderQuery->offset($offset)->limit($limit)->all();
@@ -265,12 +266,17 @@ class AdminController extends Controller
                     }
                 }
                 $data['children'] = $user1;
-                
                 $this->asJson($data);
             }
         } else {
             return $this->render('user_chart');
         }
+    }
+
+    public function actionCheckProof(){
+        $order_id = Yii::$app->request->get('id');
+        $proof = (new Query())->from('proof')->where(['order_id'=>$order_id])->one();
+        return $this->render('upload',['proof'=>$proof]);
     }
 
 
