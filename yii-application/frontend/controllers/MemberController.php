@@ -39,7 +39,7 @@ class MemberController extends Controller
     public function actionQrcode()
     {
         $id = Yii::$app->view->params['user_id'];
-        $link = $_SERVER['HTTP_HOST'] . '/index.php?r=member/register&pid=' . $id;
+        $link = "http://".$_SERVER['HTTP_HOST'] . '/index.php?r=member/register&p_id=' . $id;
         return $this->render('qrcode', ['link' => $link]);
     }
 
@@ -52,6 +52,7 @@ class MemberController extends Controller
                 $username = Yii::$app->request->post('username');
                 $password = Yii::$app->request->post('password');
                 $phone = Yii::$app->request->post('phone');
+                $pid = Yii::$app->request->post('p_id');
                 if (empty($username) || empty($password) || empty($phone)) {
                     throw new \Exception("请填写完整");
                 }
@@ -64,7 +65,7 @@ class MemberController extends Controller
                 }
                 $shequ_name = '';
                 if($pid){
-                    $puser = (new Query())->from('user')->where(['id'=>$user['p_id']])->one();
+                    $puser = (new Query())->from('user')->where(['id'=>$pid])->one();
                     $shequ_name = $puser['shequ_name'];
                 }
                 $user = new User();

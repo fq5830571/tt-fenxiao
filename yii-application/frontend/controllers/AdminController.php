@@ -255,8 +255,9 @@ class AdminController extends Controller
                     'title'=>'',
                 ];
                 $user_1List = (new Query())->from('user')->where(['p_id'=>0])->all();
-                $user1 = [];
-                foreach ($user_1List as $key=>$user){
+                $users = $this->array_recursion($user_1List);
+
+                /*foreach ($user_1List as $key=>$user){
                     $user1[$key]['name'] =  $user['name'];
                     $user1[$key]['title'] =  $user['phone'];
                     $user_2List = (new Query())->from('user')->where(['p_id'=>$user['id']])->all();
@@ -264,13 +265,30 @@ class AdminController extends Controller
                         $user1[$key]['children'][$k2]['name'] = $user2['name'];
                         $user1[$key]['children'][$k2]['title'] = $user2['phone'];
                     }
-                }
-                $data['children'] = $user1;
+                }*/
+                $data['children'] = $users;
                 $this->asJson($data);
             }
         } else {
             return $this->render('user_chart');
         }
+    }
+
+    private function array_recursion($user_1List){
+        $data = [];
+        foreach ($user_1List as $key=>$user){
+            $data[$key]['name'] =  $user['username'];
+            $data[$key]['title'] =  $user['phone'];
+            $user_2List = (new Query())->from('user')->where(['p_id'=>$user['id']])->all();
+            if($user_2List){
+                $data[$key]['children'] = $this->array_recursion($user_2List);
+            }
+            /*foreach ($user_2List as $k2=>$user2){
+                $user1[$key]['children'][$k2]['name'] = $user2['name'];
+                $user1[$key]['children'][$k2]['title'] = $user2['phone'];
+            }*/
+        }
+        return $data;
     }
 
     public function actionCheckProof(){

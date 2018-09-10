@@ -76,7 +76,7 @@
 			</span>
         <span class="header_right">
 				<div class="header_l_di">
-					<span>昵称：<?=$user['name'] ?></span>&nbsp;&nbsp;
+					<span>昵称：<?=$user['name']?$user['name']:$user['username'] ?></span>&nbsp;&nbsp;
 					<<a style='color:red' href="/index.php?r=member/edit-member">账号设置</a>>
 				</div>
 				<div><span>社区：</span><?=$user['shequ_name'] ?></div>

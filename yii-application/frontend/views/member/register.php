@@ -47,6 +47,7 @@
     <form onSubmit="javascript:return check(formUser);" action="/index.php?r=member/register" method="post" name="formUser">
         <table width="100%">
             <tbody><tr>
+                <input name="p_id" type="hidden"  value="<?=$puser['id']?>">
                 <td align="right" width="20%">用户名：&nbsp;</td>
                 <td><input name="username" type="text" id="login" class="common-input" placeholder="请填写用户名！" style="width:90%;">
                     <span id="username_notice" style="color:#FF0000"> *</span></td>
