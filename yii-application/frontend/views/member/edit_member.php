@@ -47,9 +47,8 @@
                     <li>
                         <table style="padding: 0; margin: 0; width: 100%;">
                             <tbody>
-                            <?php if($user['p_id'] == 0){?>
                                 <tr>
-                                    <td width="80px"><label for="price" class="ui-input-text">设置社区：</label></td>
+                                    <td width="80px"><label for="price" class="ui-input-text">设置小区：</label></td>
                                     <td>
                                         <div class="ui-input-text">
                                             <input name="shequ_name" placeholder="" value="<?=$user['shequ_name']?>" type="text"
@@ -57,7 +56,6 @@
                                         </div>
                                     </td>
                                 </tr>
-                            <?php }?>
                             <tr>
                                 <td width="80px"><label for="price" class="ui-input-text">设置昵称：</label></td>
                                 <td>

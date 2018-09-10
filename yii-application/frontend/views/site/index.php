@@ -79,7 +79,7 @@
 					<span>昵称：<?=$user['name']?$user['name']:$user['username'] ?></span>&nbsp;&nbsp;
 					<<a style='color:red' href="/index.php?r=member/edit-member">账号设置</a>>
 				</div>
-				<div><span>社区：</span><?=$user['shequ_name'] ?></div>
+				<div><span>小区名：</span><?=$user['shequ_name'] ?></div>
 				<div><span>注册时间：<?=date('Y-m-d',$user['created_time']) ?>&nbsp;&nbsp;
                         <<a style='color:red' href="./index.php?r=member/logout">退出登录</a>></span></div>
 				<div><span> 会员ID：<?=$user['id'] ?>
@@ -89,7 +89,7 @@
     <div class="div_table">
         <table style='height:35px;text-align:center;background-color:#e61945;border:0px' border=0>
             <tr style="border:0px" border=0>
-                <td style="background-color:#e61945;">销售额：<?=$user['balance'] * 5?>元</td>
+                <!--<td style="background-color:#e61945;">销售额：<?/*=$user['balance'] * 5*/?>元</td>-->
                 <td style="border-left:1px solid #fff;background-color:#e61945;">我的佣金：<?=$user['balance'] ?>元</td>
             </tr>
         </table>

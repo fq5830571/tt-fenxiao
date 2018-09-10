@@ -50,6 +50,7 @@ class MemberController extends Controller
             try {
                 $code = isset($_GET['code'])?$_GET['code']:0;
                 $username = Yii::$app->request->post('username');
+                $shequName = Yii::$app->request->post('shequ_name');
                 $password = Yii::$app->request->post('password');
                 $phone = Yii::$app->request->post('phone');
                 $pid = Yii::$app->request->post('p_id');
@@ -63,11 +64,6 @@ class MemberController extends Controller
                 if($user){
                     throw new \Exception("该用户名已经被注册");
                 }
-                $shequ_name = '';
-                if($pid){
-                    $puser = (new Query())->from('user')->where(['id'=>$pid])->one();
-                    $shequ_name = $puser['shequ_name'];
-                }
                 $user = new User();
                 $userData = [
                     'username'=>$username,
@@ -75,7 +71,7 @@ class MemberController extends Controller
                      'phone'=>$phone,
                      'created_time'=>time(),
                      'p_id'=>intval($pid),
-                     'shequ_name'=>$shequ_name,
+                     'shequ_name'=>$shequName,
                 ];
                 $user->setAttributes($userData,false);
                 $result = $user->save();

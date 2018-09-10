@@ -46,10 +46,17 @@
 <div class="login-reg mc radius">
     <form onSubmit="javascript:return check(formUser);" action="/index.php?r=member/register" method="post" name="formUser">
         <table width="100%">
-            <tbody><tr>
+            <tbody>
+            <tr>
                 <input name="p_id" type="hidden"  value="<?=$puser['id']?>">
-                <td align="right" width="20%">用户名：&nbsp;</td>
-                <td><input name="username" type="text" id="login" class="common-input" placeholder="请填写用户名！" style="width:90%;">
+                <td align="right" width="20%">小区名：&nbsp;</td>
+                <td><input name="shequ_name" type="text" id="shequ_name" class="common-input" placeholder="请填写小区名！" style="width:90%;">
+                    <span id="username_notice" style="color:#FF0000"> *</span></td>
+            </tr>
+            <tr>
+                <input name="p_id" type="hidden"  value="<?=$puser['id']?>">
+                <td align="right" width="20%">姓名：&nbsp;</td>
+                <td><input name="username" type="text" id="login" class="common-input" placeholder="请填写姓名！" style="width:90%;">
                     <span id="username_notice" style="color:#FF0000"> *</span></td>
             </tr>
             <tr>

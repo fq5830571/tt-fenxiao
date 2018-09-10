@@ -114,7 +114,7 @@ class SiteController extends Controller
             echo '请选择商品';
             die;
         }
-        return $this->render('pay', ['id' => $id, 'goods' => $goods]);
+        return $this->render('pay1', ['id' => $id, 'goods' => $goods]);
     }
 
     public function actionPay()
