@@ -60,6 +60,7 @@ class AdminController extends Controller
         $name = Yii::$app->request->post('name');
         $bonusQuery = (new Query())->from('bonus_record')
             ->select('bonus_record.*,user.name,user.balance,order.order_sn,user.username')
+            ->where('user_id <> 99999')
             ->leftJoin('user', 'user.id = bonus_record.user_id')
             ->leftJoin('order', 'order.id = bonus_record.order_id')
             ->orderBy('bonus_record.created_time desc');
