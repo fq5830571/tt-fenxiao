@@ -61,6 +61,7 @@ class MemberController extends Controller
                 if($user){
                     throw new \Exception("该用户名已经被注册");
                 }
+                $pid = 0;
                 if(empty($code) && $code != 'AUTHOR'){
                     throw new \Exception("请输入邀请码");
                 }
