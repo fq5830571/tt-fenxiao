@@ -41,20 +41,18 @@
 </head>
 <body>
 <header>
-    <p class="button_img" style="line-height: 3em; color:#fff;width:100%;text-align:center; margin:0 auto;"><?=$puser?'您由【'.$puser['name'].'】推荐':'立即关注，组建社区'?></p>
+    <p class="button_img" style="line-height: 3em; color:#fff;width:100%;text-align:center; margin:0 auto;"><?='立即关注，组建社区'?></p>
 </header>
 <div class="login-reg mc radius">
     <form onSubmit="javascript:return check(formUser);" action="/index.php?r=member/register" method="post" name="formUser">
         <table width="100%">
             <tbody>
             <tr>
-                <input name="p_id" type="hidden"  value="<?=$puser['id']?>">
                 <td align="right" width="20%">小区名：&nbsp;</td>
                 <td><input name="shequ_name" type="text" id="shequ_name" class="common-input" placeholder="请填写小区名！" style="width:90%;">
                     <span id="username_notice" style="color:#FF0000"> *</span></td>
             </tr>
             <tr>
-                <input name="p_id" type="hidden"  value="<?=$puser['id']?>">
                 <td align="right" width="20%">姓名：&nbsp;</td>
                 <td><input name="username" type="text" id="login" class="common-input" placeholder="请填写姓名！" style="width:90%;">
                     <span id="username_notice" style="color:#FF0000"> *</span></td>
@@ -68,6 +66,11 @@
                 <td align="right">手机：&nbsp;</td>
                 <td><input placeholder="请填写手机号！" name="phone" type="text" id="phone" class="common-input" style="width:90%;">
                     <span style="color:#FF0000" id="password_notice"> *</span></td>
+            </tr>
+            <tr>
+                <td align="right">邀请码：&nbsp;</td>
+                <td><input value="<?=!empty($code)?$code:''?>" placeholder="请填写邀请码！" name="code" type="text" id="code" class="common-input" style="width:90%;">
+                    <span style="color:#FF0000" id=""> *</span></td>
             </tr>
            <!-- <tr>
                 <td align="right">邮箱：&nbsp;</td>

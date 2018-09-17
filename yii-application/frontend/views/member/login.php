@@ -37,7 +37,8 @@
         <p style="text-align:left; float:left;">
            <!-- <span class="red">注：微信登录时，不需要输入账号密码，但需要在微信中操作！</span>-->
             <br>
-
+            <br>
+            还没有注册？点击【<a href="/index.php?r=member/register">注册</a>】</p>
     </div>
 </div>
 ﻿<div class="to-top"><a href="javascript:scroll(0,0)" hidefocus="true"><span></span>回顶部</a></div>

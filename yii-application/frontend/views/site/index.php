@@ -82,7 +82,7 @@
 				<div><span>小区名：</span><?=$user['shequ_name'] ?></div>
 				<div><span>注册时间：<?=date('Y-m-d',$user['created_time']) ?>&nbsp;&nbsp;
                         <<a style='color:red' href="./index.php?r=member/logout">退出登录</a>></span></div>
-				<div><span> 会员ID：<?=$user['id'] ?>
+				<div><span> 我的邀请码：<?=$user['code'] ?>
 				   </span></div>
     </div>
 

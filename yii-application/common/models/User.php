@@ -5,6 +5,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 use yii\web\IdentityInterface;
 
 /**
@@ -46,5 +47,16 @@ class User extends ActiveRecord
         return $levelList[$level]?$levelList[$level]:'未知等级';
     }
 
+    public static function getCode(){
+        $res = false;
+        while ($res == false) {
+            $code = substr(base_convert(md5(uniqid(md5(microtime(true)),true)), 16, 10), 0, 6);
+            $count = (new Query())->from('user')->where(['code'=>$code])->count();
+            if ($count == 0) {
+                $res = true;
+            }
+        }
+        return  $code;
+    }
 
 }

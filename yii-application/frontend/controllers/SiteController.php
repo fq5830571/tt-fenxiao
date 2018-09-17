@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Order;
+use common\models\User;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\db\Query;
@@ -88,6 +89,11 @@ class SiteController extends Controller
         $user = (new Query())->from('user')->where(['id' => $id])->one();
         if (empty($user)) {
             return $this->redirect('/index.php?r=member/login');
+        }
+        if(empty($user['code'])){
+            $code = User::getCode();
+            User::updateAll(['code'=>$code],['id'=>$id]);
+            $user['code'] = $code;
         }
         $parentUser = (new Query())->select('name')->from('user')->where(['id' => $user['p_id']])->one();
         $parentName = isset($parentUser['name']) ? $parentUser['name'] : '总裁';

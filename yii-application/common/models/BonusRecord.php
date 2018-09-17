@@ -38,19 +38,24 @@ class BonusRecord extends ActiveRecord
             $ownScale = 0.1;
             $result = self::record($orderId,$order['user_id'],$order['amount'],$ownScale);
             if(empty($result)){
-                throw new \Exception("标记失败1");
+                throw new \Exception("标记失败");
             }
+            $parentScale = 0.02;
             if ($user['p_id']) {
-                $parentScale = 0.02;
                 $result =  self::record($orderId,$user['p_id'],$order['amount'],$parentScale);
                 if(empty($result)){
-                    throw new \Exception("标记失败2");
+                    throw new \Exception("标记失败");
+                }
+            }else{
+                $result =  self::record($orderId,99998,$order['amount'],$parentScale);
+                if(empty($result)){
+                    throw new \Exception("标记失败");
                 }
             }
             $companyScale = 1-$parentScale-$ownScale;
             $result =  self::record($orderId,99999,$order['amount'],$companyScale);
             if(empty($result)){
-                throw new \Exception("标记失败3");
+                throw new \Exception("标记失败");
             }
             $transaction->commit();
             return [true, '成功'];
