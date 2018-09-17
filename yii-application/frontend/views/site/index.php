@@ -96,7 +96,7 @@
 
     </div>
 
-    <div class="cardexplain" style="TEXT-ALIGN: center;color:#000;font-size:14px;">您是由【<?=$parentName ?>】推荐</div>
+    <!--<div class="cardexplain" style="TEXT-ALIGN: center;color:#000;font-size:14px;">您是由【<?/*=$parentName */?>】推荐</div>-->
     <div class="cardexplain" style="TEXT-ALIGN: center;color:#006400;font-size:13px;">
         <?php if($message){?>
         <marquee scrollamount="1" scrolldelay="7" direction="left"><?=$message['content']?></marquee>
