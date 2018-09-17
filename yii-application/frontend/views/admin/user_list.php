@@ -55,9 +55,9 @@ $this->title = '用户管理';
             <tr>
                 <!--<th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>-->
                 <th >用户id</th>
-                <th >用户名</th>
+                <th >姓名</th>
                 <th >身份证</th>
-                <th >社区名</th>
+                <th >小区</th>
                 <th >群编号</th>
                 <th >上级</th>
                 <th >等级</th>
@@ -71,7 +71,7 @@ $this->title = '用户管理';
             <?php foreach ($userList as $user){?>
             <tr>
                 <td class="hidden-xs"><?=$user['id']?></td>
-                <td class="hidden-xs"><?=$user['name']?></td>
+                <td class="hidden-xs"><?=$user['username']?></td>
                 <td class="hidden-xs"><?=$user['card']?></td>
                 <td class="hidden-xs"><?=$user['shequ_name']?></td>
                 <td class="hidden-xs"><?=$user['p_id']?$user['p_id']:$user['id']?></td>

@@ -46,7 +46,6 @@
                             <div class="i_li_img_div_inner"><span class="sellerOut"></span></div>
                         </div>
                         <p class="i_txt"><?= $goods['goods_name'] ?></p>
-                        <p class="i_pri_wrap"><span class="i_pri">¥<?= $goods['money'] ?> </span>
                         </p>
                     </a></li>
 
@@ -55,13 +54,7 @@
         <div class="clear"></div>
     </div>
 </section>
-<p id="scroll_loading_txt" class="loading hide">&nbsp;</p>
-<div id="item_empty" class="hide c_txt">对不起，该分类下暂无商品</div>
-<img src="../images/sucai2015061201.jpg" width="100%">
 </section>
-<p id="scroll_loading_txt" class="loading hide">&nbsp;</p>
-<div id="item_empty" class="hide c_txt">对不起，该分类下暂无商品</div>
-<img src="../images/sucai2015061201.jpg" width="100%">
 <script src="../Public/Static/js/getItems.htm"></script>
 <script src="../Public/Static/js/getPubInfo.htm"></script>
 <script src="../Public/Static/js/itemListTemplate.js"></script>

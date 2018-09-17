@@ -97,7 +97,7 @@
             <ul id="ullist">
                 <dt style="display:none;">已选购的</dt>
                 <li class="ccbg2" id="wemall_1">
-                    <div class="orderdish"><span name="title">申请购买</span>
+                    <div class="orderdish"><span name="title">申请购买<?=$goods['goods_name']?></span>
                         <span class="price" id="v_0" style="display:none;">
 
                         </span>
